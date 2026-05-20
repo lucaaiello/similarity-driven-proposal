@@ -27,7 +27,7 @@ The folder `Real_Data_Analysis/` contains all materials needed to reproduce the 
   - **Main manuscript (Section 5):**
     - Figure 4  
     - Table 1  
-  - **Supplementary material (Section S3):**
+  - **Supplementary material (Section S2):**
     - Figures S6–S8  
     - Table S1  
 
