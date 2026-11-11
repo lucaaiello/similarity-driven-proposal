@@ -92,8 +92,8 @@ chains$mean_model_size<-vapply(seq_len(nrow(chains)),function(i) {
 export("S14_application_chains",chains)
 export("S15_application_scalars",rd(file.path(app,"scalar_diagnostics.csv")))
 # Static design/method tables are definitions, not estimates from chains.
-for(doc in c("main_r1","supplements_r1")) {
-  text<-paste(readLines(file.path("JCGS_submission",paste0(doc,".tex")),warn=FALSE),collapse="\n")
+for(doc in c("tab_DM_methods","tab_simulation_designs","tab_simulation_methods")) {
+  text<-paste(readLines(file.path("reproduce/reference",paste0(doc,".tex")),warn=FALSE),collapse="\n")
   blocks<-regmatches(text,gregexpr("(?s)\\\\begin\\{table\\}.*?\\\\end\\{table\\}",text,perl=TRUE))[[1]]
   for(b in blocks) {
     label<-regmatches(b,regexec("\\\\label\\{([^}]+)\\}",b))[[1]]

@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\caption{Score sensitivity at $n=100$, $P=10$, across 20 datasets. Parentheses give MCSEs; posterior errors are in percentage points. Sampling summaries concern adaptive kernels.}
+\label{tab:exact_score_sensitivity}
+% \small
+% \setlength{\tabcolsep}{4pt}
+\resizebox{\textwidth}{!}{
+\fontsize{12}{9}\selectfont
+\begin{tabular}{lrrrrrr}
+\toprule
+Score & Weighted rank correlation & Final $\lambda$ & $\overline N_{\mathrm{eff}}$ & Robust ESS/s & PIP MAE & TV \\
+\midrule
+F & $0.924\;(0.016)$ & $1.19\;(0.06)$ & $5.050\;(0.004)$ & $7{,}565\;(297)$ & $0.172\;(0.008)$ & $1.491\;(0.056)$ \\
+BIC/LR & $0.957\;(0.009)$ & $0.99\;(0.05)$ & $5.035\;(0.004)$ & $7{,}565\;(276)$ & $0.171\;(0.010)$ & $1.518\;(0.057)$ \\
+Marginal & $0.369\;(0.033)$ & $1.04\;(0.02)$ & $5.055\;(0.005)$ & $4{,}474\;(448)$ & $0.229\;(0.021)$ & $2.025\;(0.145)$ \\
+\bottomrule
+\end{tabular}
+}
+\end{table}

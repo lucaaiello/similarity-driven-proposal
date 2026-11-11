@@ -1,0 +1,22 @@
+\begin{table}[t]
+\centering
+\caption{Proposal diagnostics at $P=1000$ across 20 datasets. Parentheses give MCSEs. Adaptive proposals target $N_\star=25$; PIP range measures between-chain disagreement.}
+\label{tab:highdim_proposal_diagnostics}
+% \small
+\resizebox{\textwidth}{!}{
+\fontsize{12}{9}\selectfont
+\begin{tabular}{lrrrr}
+\toprule
+Method & Final $\lambda$ & $\overline N_{\mathrm{eff}}$ & Acceptance & PIP range \\
+\midrule
+Uniform & -- & -- & $0.0061\;(0.0002)$ & $0.0065$ \\
+F, fixed & $0.700$ & $26.37\;(0.57)$ & $0.3660\;(0.0060)$ & $0.0084$ \\
+F, adaptive & $0.684\;(0.011)$ & $27.44\;(0.33)$ & $0.3290\;(0.0060)$ & $0.0098$ \\
+BIC/LR, fixed & $0.700$ & $16.19\;(0.29)$ & $0.5040\;(0.0050)$ & $0.0059$ \\
+BIC/LR, adaptive & $0.586\;(0.004)$ & $25.11\;(0.09)$ & $0.3800\;(0.0030)$ & $0.0075$ \\
+Exact LB & -- & -- & $0.8850\;(0.0050)$ & $0.0038$ \\
+BIC/Laplace LB & -- & -- & $0.8620\;(0.0030)$ & $0.0036$ \\
+\bottomrule
+\end{tabular}
+}
+\end{table}

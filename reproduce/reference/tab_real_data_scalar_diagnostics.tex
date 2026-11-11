@@ -1,0 +1,31 @@
+\begin{table}[t]
+\centering
+\small
+\caption{Rank-normalized folded split $\widehat R$ and bulk/tail ESS across four cold chains per method.}
+\label{tab:real_data_scalar_diagnostics}
+\renewcommand{\arraystretch}{0.9}
+\fontsize{10}{11}\selectfont
+\begin{tabular}{llrrr}
+\toprule
+Method & Quantity & $\widehat R$ & Bulk ESS & Tail ESS \\
+\midrule
+Similarity flip & Overall model size & 1.105 & 24.4 & 172.5 \\
+ & Prevotella model size & 1.701 & 6.5 & 40.3 \\
+ & Prevotella intercept & 1.234 & 12.3 & 64.0 \\
+ & Log posterior & 1.084 & 31.6 & 272.2 \\
+ & Mean Prevotella proportion & 1.231 & 12.3 & 31.9 \\
+\addlinespace
+Similarity + swap & Overall model size & 1.060 & 44.4 & 222.7 \\
+ & Prevotella model size & 1.317 & 9.8 & 71.1 \\
+ & Prevotella intercept & 1.159 & 17.2 & 107.8 \\
+ & Log posterior & 1.012 & 751.5 & 5822.8 \\
+ & Mean Prevotella proportion & 1.228 & 12.3 & 78.4 \\
+\addlinespace
+Uniform flip & Overall model size & 1.025 & 129.0 & 204.4 \\
+ & Prevotella model size & 1.034 & 105.3 & 107.5 \\
+ & Prevotella intercept & 1.090 & 28.8 & 309.6 \\
+ & Log posterior & 1.028 & 151.4 & 747.1 \\
+ & Mean Prevotella proportion & 1.024 & 163.2 & 1643.2 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,23 @@
+\begin{table}[!t]
+\centering
+\caption{Parameter diagnostics across five datasets. Counts indicate $\widehat R>1.01$ among available diagnostics; extrema use finite values. MCSEs concern posterior means.}
+\label{tab:DM_parameter_diagnostics}
+\fontsize{12}{9}\selectfont
+\begin{tabular}{rlrrrr}
+\toprule
+Steps & Quantity & Count/available & Max.\ $\widehat R$ & Min.\ bulk ESS & Max.\ MCSE \\
+\midrule
+1 & Active coefficients & 41/50 & 1.067 & 56 & 0.0293 \\
+1 & Inclusion indicators & 31/416 & 1.078 & 40 & 0.0449 \\
+1 & Intercepts & 13/25 & 1.030 & 182 & 0.0105 \\
+\addlinespace
+5 & Active coefficients & 37/50 & 1.067 & 64 & 0.0197 \\
+5 & Inclusion indicators & 18/421 & 1.057 & 76 & 0.0332 \\
+5 & Intercepts & 13/25 & 1.029 & 167 & 0.0111 \\
+\addlinespace
+10 & Active coefficients & 36/50 & 1.045 & 96 & 0.0232 \\
+10 & Inclusion indicators & 21/420 & 1.042 & 61 & 0.0405 \\
+10 & Intercepts & 13/25 & 1.023 & 200 & 0.0094 \\
+\bottomrule
+\end{tabular}
+\end{table}

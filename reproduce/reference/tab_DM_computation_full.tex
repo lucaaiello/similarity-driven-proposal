@@ -1,0 +1,103 @@
+\begin{table}[!t]
+\centering
+\caption{DM performance over 20 datasets; parentheses give MCSEs. Seconds are per chain; accepted swaps are counted per sweep; $\widehat R$ is rank-normalized split.}
+\label{tab:DM_computation_full}
+% \small
+% \setlength{\tabcolsep}{3.5pt}
+\resizebox{\textwidth}{!}{
+\fontsize{12}{9}\selectfont
+\begin{tabular}{lrrrrrr}
+\toprule
+Method
+&
+Seconds
+&
+Flip acceptance
+&
+Swap/iter.
+&
+Robust ESS/s
+&
+$\widehat R_{|\xi|}$
+&
+$\widehat R_{\log\pi}$
+\\
+\midrule
+Uniform
+&
+$44.5\;(0.3)$
+&
+$0.145\;(0.009)$
+&
+--
+&
+$1.011\;(0.057)$
+&
+$1.012\;(0.003)$
+&
+$1.034\;(0.005)$
+\\
+
+Similarity, fixed
+&
+$203.4\;(1.6)$
+&
+$0.633\;(0.019)$
+&
+--
+&
+$0.890\;(0.035)$
+&
+$1.001\;(0.000)$
+&
+$1.004\;(0.001)$
+\\
+
+Similarity, adaptive
+&
+$205.7\;(1.5)$
+&
+$0.597\;(0.018)$
+&
+--
+&
+$0.666\;(0.032)$
+&
+$1.002\;(0.000)$
+&
+$1.039\;(0.033)$
+\\
+
+Adaptive plus swap
+&
+$375.0\;(4.2)$
+&
+$0.596\;(0.018)$
+&
+$0.087\;(0.009)$
+&
+$0.523\;(0.026)$
+&
+$1.003\;(0.001)$
+&
+$1.004\;(0.001)$
+\\
+
+Gagnon--Laplace
+&
+$452.4\;(2.3)$
+&
+$0.868\;(0.016)$
+&
+--
+&
+$0.544\;(0.019)$
+&
+$1.000\;(0.000)$
+&
+$1.002\;(0.001)$
+\\
+\bottomrule
+\end{tabular}
+}
+\end{table}

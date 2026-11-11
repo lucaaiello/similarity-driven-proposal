@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\caption{Adaptive-score sensitivity at correlated $n=P=200$ across ten datasets. Parentheses give ESS/s MCSEs; PIP range is the predictor-averaged between-chain range.}
+\label{tab:correlated_score_sensitivity}
+% \small
+% \setlength{\tabcolsep}{4pt}
+\resizebox{\textwidth}{!}{
+\fontsize{12}{9}\selectfont
+\begin{tabular}{lrrrrrrrr}
+\toprule
+Score & Final $\lambda$ & $\overline N_{\mathrm{eff}}$ & Acceptance & Robust ESS/s & $\widehat R_{|\bs\xi|}$ & $\widehat R_{\log\pi}$ & PIP range & Active PIP \\
+\midrule
+F & $1.67$ & $5.52$ & $0.178$ & $11.79\;(1.10)$ & $1.020$ & $1.023$ & $0.0407$ & $0.816$ \\
+BIC/LR & $1.26$ & $5.29$ & $0.196$ & $14.67\;(1.16)$ & $1.018$ & $1.020$ & $0.0360$ & $0.814$ \\
+Marginal & $1.62$ & $5.17$ & $0.020$ & $6.32\;(0.31)$ & $1.080$ & $1.163$ & $0.0860$ & $0.783$ \\
+\bottomrule
+\end{tabular}
+}
+\end{table}

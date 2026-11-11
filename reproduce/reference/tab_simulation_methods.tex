@@ -1,0 +1,28 @@
+\begin{table}[!t]
+\centering
+\caption{Proposal mechanisms used in the simulation experiments.}
+\label{tab:simulation_methods}
+% \small
+% \setlength{\tabcolsep}{5pt}
+% \renewcommand{\arraystretch}{1.15}
+\fontsize{12}{9}\selectfont
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}p{0.70\linewidth}@{}}
+\toprule
+Method & Proposal construction \\
+\midrule
+Uniform & Uniform one-flip proposal. \\
+F similarity & F-derived auxiliary weights; fixed or diversity-adapted $\lambda$. \\
+BIC/LR similarity & BIC-penalized LR auxiliary weights; fixed or diversity-adapted $\lambda$. \\
+Marginal screening & Sum of univariate F-test scores divided by the square root of model size; fixed or adaptive $\lambda$. \\
+Exact LB & Barker balancing of exact Gaussian posterior ratios. \\
+BIC/Laplace LB & Barker balancing of BIC-based approximate posterior-weight ratios. \\
+Graph-guided swaps & Uniform or similarity-informed replacement of an active predictor by an inactive graph neighbor. \\
+Gagnon--Laplace RJ & Barker-balanced conditional Laplace weights and posterior-mode/Hessian Gaussian coefficient proposals. \\
+\bottomrule
+\end{tabular}
+\par\smallskip
+\begin{minipage}{\linewidth}
+\footnotesize
+Notes: BIC denotes Bayesian information criterion; LR, likelihood ratio; LB, locally balanced; RJ, reversible-jump. Fixed and adaptive similarity proposals share balanced birth--death directions and a direction-preserving uniform component. All mechanisms use the appropriate posterior acceptance correction.
+\end{minipage}
+\end{table}

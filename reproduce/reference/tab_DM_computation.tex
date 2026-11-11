@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\caption{DM diagnostics across 20 datasets; Monte Carlo standard errors in parentheses.}
+\label{tab:DM_computation}
+\fontsize{12}{9}\selectfont
+\begin{tabular}{lrrr}
+\toprule
+Method & Seconds/chain & Robust ESS/s & $\widehat R_{\log\pi}$ \\
+\midrule
+Uniform & $44.5\;(0.3)$ & $1.011\;(0.057)$ & $1.034\;(0.005)$ \\
+Similarity, fixed & $203.4\;(1.6)$ & $0.890\;(0.035)$ & $1.004\;(0.001)$ \\
+Similarity, adaptive & $205.7\;(1.5)$ & $0.666\;(0.032)$ & $1.039\;(0.033)$ \\
+Adaptive plus swap & $375.0\;(4.2)$ & $0.523\;(0.026)$ & $1.004\;(0.001)$ \\
+Gagnon--Laplace & $452.4\;(2.3)$ & $0.544\;(0.019)$ & $1.002\;(0.001)$ \\
+\bottomrule
+\end{tabular}
+\end{table}

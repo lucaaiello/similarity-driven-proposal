@@ -10,7 +10,7 @@ ord<-function(d,key,ids)d[match(ids,d[[key]]),,drop=FALSE]
 pair<-function(z,n,m=1)c(z[[paste0(n,"_mean")]],z[[paste0(n,"_se")]])*m
 checks<-list()
 check<-function(id,doc,label,expected,skip=1L) {
-  text<-paste(readLines(file.path("JCGS_submission",paste0(doc,".tex")),warn=FALSE),collapse="\n")
+  text<-paste(readLines(file.path("reproduce/reference",paste0(gsub(":","_",label),".tex")),warn=FALSE),collapse="\n")
   blocks<-regmatches(text,gregexpr("(?s)\\\\begin\\{table\\}.*?\\\\end\\{table\\}",text,perl=TRUE))[[1]]
   block<-blocks[grepl(paste0("\\label{",label,"}"),blocks,fixed=TRUE)]
   stopifnot(length(block)==1L)

@@ -55,9 +55,9 @@ explicit TeX tables at their reported precision.
 | S14, application chains | `S14_application_chains.csv` |
 | S15, application scalar diagnostics | `S15_application_scalars.csv` |
 
-Static tables describe designs/methods and are extracted from the TeX sources;
-they are not estimates. The model diagram and algorithm pseudocode likewise
-remain explicit manuscript assets. Build the documents for their typeset form.
+Static tables describe designs/methods and are retained as table-only reference
+snippets in `reproduce/reference/`; they are not estimates. That directory also
+contains the model diagram. Full manuscript documents are not distributed here.
 
 ## Aggregation and presentation
 

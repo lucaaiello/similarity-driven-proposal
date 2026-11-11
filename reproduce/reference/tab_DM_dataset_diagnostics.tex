@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering
+\caption{DM agreement across 20 datasets: median/upper quartile/maximum $\widehat R$; counts exceeding thresholds for either scalar; median/maximum predictor-averaged between-chain PIP range.}
+\label{tab:DM_dataset_diagnostics}
+% \small
+\resizebox{\textwidth}{!}{
+\fontsize{12}{9}\selectfont
+\begin{tabular}{lrrrrr}
+\toprule
+Method & $\widehat R_{|\bs\xi|}$ & $\widehat R_{\log\pi}$ & $>1.01$ & $>1.05$ & PIP range \\
+\midrule
+Uniform & 1.010/1.017/1.052 & 1.029/1.041/1.091 & 18 & 4 & 0.0224/0.0467 \\
+Similarity, fixed & 1.001/1.002/1.006 & 1.003/1.005/1.009 & 0 & 0 & 0.0110/0.0215 \\
+Similarity, adaptive & 1.002/1.002/1.007 & 1.005/1.011/1.662 & 6 & 1 & 0.0130/0.0327 \\
+Adaptive plus swap & 1.002/1.003/1.015 & 1.003/1.005/1.014 & 3 & 0 & 0.0090/0.0121 \\
+Gagnon--Laplace & 1.000/1.001/1.005 & 1.002/1.004/1.006 & 0 & 0 & 0.0094/0.0182 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}

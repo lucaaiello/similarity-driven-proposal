@@ -46,7 +46,7 @@ if(recompute=="true") {
 }
 step("all_tables","reproduce/tables.R",c(paste0("--output=",out),paste0("--parameters=",parameter_input)))
 step("verify_printed_tables","reproduce/check_tables.R",paste0("--output=",out))
-file.copy("JCGS_submission/Images/DM_diagram_2.pdf",file.path(out,"figures/DM_diagram_2.pdf"))
+stopifnot(file.copy("reproduce/reference/DM_diagram_2.pdf",file.path(out,"figures/DM_diagram_2.pdf")))
 capture.output(sessionInfo(),file=file.path(out,"sessionInfo.txt"))
 write.csv(data.frame(package=needed,version=vapply(needed,function(p)as.character(packageVersion(p)),"")),
   file.path(out,"package_versions.csv"),row.names=FALSE)

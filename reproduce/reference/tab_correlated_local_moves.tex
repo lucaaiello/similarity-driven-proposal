@@ -1,0 +1,22 @@
+\begin{table}[t]
+\centering
+\caption{Correlated-design results across 30 datasets. Parentheses give MCSEs; block-state changes are per 1,000 iterations and surrogate PIPs are summed within blocks.}
+\label{tab:correlated_local_moves}
+% \small
+% \setlength{\tabcolsep}{4pt}
+\resizebox{\textwidth}{!}{
+\fontsize{12}{9}\selectfont
+\begin{tabular}{lrrrrr}
+\toprule
+Method & Block-state changes & Multi-component jumps (\%) & Robust ESS/s & Active PIP & Surrogate PIP sum \\
+\midrule
+F: flip only & $4.00\;(0.20)$ & $0.0$ & $13.34\;(0.95)$ & $0.779\;(0.014)$ & $0.350\;(0.014)$ \\
+F: uniform swap & $12.03\;(0.59)$ & $16.4\;(0.7)$ & $16.60\;(1.89)$ & $0.786\;(0.014)$ & $0.341\;(0.014)$ \\
+F: informed swap & $15.36\;(0.71)$ & $20.2\;(0.8)$ & $15.83\;(1.55)$ & $0.787\;(0.014)$ & $0.338\;(0.014)$ \\
+BIC/LR: flip only & $4.44\;(0.24)$ & $0.0$ & $16.05\;(1.10)$ & $0.783\;(0.015)$ & $0.341\;(0.015)$ \\
+BIC/LR: uniform swap & $12.53\;(0.62)$ & $16.2\;(0.6)$ & $21.48\;(2.47)$ & $0.787\;(0.014)$ & $0.335\;(0.014)$ \\
+BIC/LR: informed swap & $20.63\;(0.95)$ & $25.5\;(1.1)$ & $18.67\;(1.88)$ & $0.787\;(0.014)$ & $0.334\;(0.014)$ \\
+\bottomrule
+\end{tabular}
+}
+\end{table}

@@ -13,7 +13,7 @@ if not target.is_relative_to(ROOT/'dist'):raise SystemExit('Output must be withi
 if target.exists():raise SystemExit('Choose a new archive filename; existing archive preserved.')
 def selected():
     files=[]
-    for name in ['New_simulations','Simulations','Real Data Analysis','JCGS_submission','reproduce','docs']:
+    for name in ['New_simulations','Simulations','Real Data Analysis','reproduce','docs']:
         for p in (ROOT/name).rglob('*'):
             if not p.is_file():continue
             r=p.relative_to(ROOT)
@@ -21,7 +21,7 @@ def selected():
             if p.suffix.lower() in {'.dll','.so','.o','.obj','.pyc','.log','.fls','.blg','.fdb_latexmk','.out'}:continue
             if name=='JCGS_submission' and p.stem in {'response_letter','cover_letter'}:continue
             files.append(p)
-    files += [ROOT/n for n in ['README.md','LICENSING.md','CITATION.cff','.gitignore','.gitattributes','asa_jcgs.bst']]
+    files += [ROOT/n for n in ['README.md','LICENSING.md','CITATION.cff','.gitignore','.gitattributes']]
     return sorted(set(files))
 files=selected()
 def digest(p):

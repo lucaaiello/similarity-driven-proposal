@@ -1,0 +1,29 @@
+\begin{table}[!t]
+\centering
+\caption{Simulation designs and sampling schedules.}
+\label{tab:simulation_designs}
+% \small
+% \setlength{\tabcolsep}{4pt}
+% \renewcommand{\arraystretch}{1.1}
+\fontsize{12}{9}\selectfont
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.21\linewidth}>{\raggedright\arraybackslash}p{0.74\linewidth}@{}}
+\toprule
+Experiment & Design and sampling \\
+\midrule
+Exact Gaussian & $n\in\{50,100,200\}$, $P\in\{8,10,12\}$; three active predictors; AR(1) correlation $0.65$. Twenty datasets per setting, three chains, 20,000 iterations, discarding 5,000. \\
+\addlinespace
+High-dimensional Gaussian & $n=200$, $P\in\{50,100,250,500,1000\}$; ten active coefficients of alternating sign and magnitude $0.8$; AR(1) correlation $0.5$. Twenty datasets per dimension, three chains, five seconds per chain. \\
+\addlinespace
+Correlated substitutes & $n=P=200$; ten five-predictor blocks with correlation $0.95$, one active predictor each, and 150 independent noise predictors. Thirty datasets, four chains, 50,000 iterations, discarding 10,000. \\
+\addlinespace
+Score sensitivity & Exact: $n=100$, $P=10$, twenty datasets, four chains, fixed-$\lambda$ grid and adaptation, one second per chain. Correlated: block design above, ten datasets, four chains, five seconds per chain. \\
+\addlinespace
+Dirichlet--Multinomial & $n=70$, $P=18$, $J=5$; AR(1) correlation $0.65$; two active effects per category. Twenty datasets, three chains, 5,000 sweeps, discarding 2,500 and retaining every fifth subsequent state. \\
+\bottomrule
+\end{tabular}
+\par\smallskip
+\begin{minipage}{\linewidth}
+\footnotesize
+Notes: AR(1) denotes first-order autoregressive predictor dependence. Chain counts and time budgets apply separately to each dataset and method.
+\end{minipage}
+\end{table}

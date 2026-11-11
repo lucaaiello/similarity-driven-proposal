@@ -87,7 +87,7 @@ RAM; measured timings are in [docs/validation_timings.csv](docs/validation_timin
 |---|---|
 | `reproduce/` | Master command, table calculations/checks, input manifest, archive builder |
 | `docs/` | Result map, data provenance, environment and optional rerun instructions |
-| `JCGS_submission/` | Current main/supplement sources, PDFs, bibliography and figure assets |
+| `reproduce/reference/` | Table-only reference snippets and model diagram; no manuscript documents |
 | `New_simulations/` | Experiment drivers, helpers, audits and saved outputs |
 | `Simulations/` | Gaussian C++ samplers used by the final experiments |
 | `Real Data Analysis/Data/` | Supplied counts, scaled dietary covariates and labels |
@@ -118,17 +118,12 @@ instructions. See [docs/DATA.md](docs/DATA.md) and
 [docs/RERUN_EXPERIMENTS.md](docs/RERUN_EXPERIMENTS.md). Sampling is optional and
 much more expensive than the saved-results workflow.
 
-## Build the documents (optional)
+## Manuscript documents
 
-With a TeX installation containing `latexmk`:
-
-```sh
-cd JCGS_submission
-latexmk -pdf -interaction=nonstopmode -halt-on-error main_r1.tex supplements_r1.tex
-```
-
-The bibliography style and cross-reference configuration are included. The
-validated main/supplement PDFs have 35/44 pages. Building them runs no analyses.
+The submission documents, PDFs, bibliography and correspondence are excluded
+from this repository. Only table reference snippets needed for numerical checks
+and the static model diagram are included under `reproduce/reference/`.
+The saved-results workflow works without the manuscript folder.
 
 ## Journal archive and release
 
