@@ -1,4 +1,4 @@
-# Optional Slurm production workflow
+# Run the application samplers again on Slurm
 
 Nothing in this folder is invoked by saved-results reproduction. The shell
 wrappers submit jobs only when `submit.sh` is explicitly run on the cluster.

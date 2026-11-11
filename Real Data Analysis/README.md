@@ -52,8 +52,10 @@ separate and require fresh implementation checks before a new sampler run.
 This separation preserves historical provenance without pretending that a
 renamed executable file has its old checksum. No result receipt was rewritten.
 
-## Optional new sampling
+## Run the application samplers again
 
+These commands generate new MCMC results and can take days on the cluster.
+They are not needed to rebuild tables and figures from the supplied results.
 Read `Cluster/README.md` and `Validation/README.md` first. New runs write to
 `Results/New_Run/`; they do not overwrite `Results/summary.rds`. The supplied
 prepared inputs define the original fresh null/5%/10%/15% starts. Running

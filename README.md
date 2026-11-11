@@ -10,9 +10,6 @@ cluster access.
 
 ### 1. Get the files and saved results
 
-If you received `reproduction_package.zip`, extract it. The archive contains
-the complete data and saved results.
-
 For a GitHub clone, install [Git LFS](https://git-lfs.com/) before cloning:
 
 ```sh
@@ -28,8 +25,9 @@ git lfs pull
 
 The application file `Real Data Analysis/Results/summary.rds` should be about
 232 MiB. A small text file in its place is a Git LFS pointer, not the result.
-GitHub's **Download ZIP** may contain pointers; use Git LFS or the complete
-reproduction archive in that case.
+GitHub's **Download ZIP** may contain pointers. Cloning with Git LFS retrieves
+the actual result file. If someone supplies the separate standalone archive
+described below, you can extract that instead, without using Git or Git LFS.
 
 ### 2. Install the R packages
 
@@ -93,7 +91,7 @@ Existing output folders are preserved. If a step fails, inspect its log in
 | Folder | What you will find |
 |---|---|
 | [Simulations/](Simulations/README.md) | Simulation experiments, their samplers and saved results. Each experiment has its own instructions and `Results/` folder. |
-| [Real Data Analysis/](Real%20Data%20Analysis/README.md) | Diet–microbiome data, the application sampler, saved results, diagnostics and optional cluster scripts. |
+| [Real Data Analysis/](Real%20Data%20Analysis/README.md) | Diet–microbiome data, the application sampler, saved results, diagnostics and Slurm scripts for rerunning the analysis. |
 | [reproduce/](reproduce/) | The shared workflow for rebuilding and checking all reported tables and figures. |
 | [docs/](docs/) | Data descriptions, detailed reproduction instructions and instructions for new sampling runs. |
 
@@ -108,19 +106,36 @@ Rscript reproduce/run.R --output=reproduced_full_diagnostics --recompute-paramet
 
 This takes additional time but still runs no sampler or optimizer.
 
-For new simulation or application runs, follow
-[docs/RERUN_EXPERIMENTS.md](docs/RERUN_EXPERIMENTS.md). Those commands execute
-MCMC and may require compilation; they are optional for reproducing the paper.
+## Run the samplers again
 
-To build a standalone ZIP containing the code, data and saved results, use
-Python 3.9 or later:
+To generate new simulation or application results by running the MCMC samplers
+again, follow [docs/RERUN_EXPERIMENTS.md](docs/RERUN_EXPERIMENTS.md). These runs
+can take hours or days and may require a C++ compiler or cluster resources.
+They write to separate `Results/New_Run/` folders, preserving the supplied
+results. You do not need to run them to rebuild the reported tables and figures.
+
+## Create a standalone reproduction archive
+
+`reproduction_package.zip` is a separately generated archive for sharing the
+code, instructions, data and saved results in one file, for example as journal
+supplementary material. It contains the actual large result object rather than
+a Git LFS pointer. Someone receiving it can extract it and follow the same
+reproduction instructions without installing Git or Git LFS.
+
+This archive is **not a file tracked in the GitHub repository** and is different
+from GitHub's **Download ZIP**. Creating it is unnecessary if you already have
+a complete clone. To create it locally, use Python 3.9 or later:
 
 ```sh
 python reproduce/prepare_archive.py
 ```
 
-The verified archive and its checksum are written to `dist/`. Existing archives
-are preserved; the script does not upload anything.
+The script writes `dist/reproduction_package.zip` and
+`dist/reproduction_package.zip.sha256`, verifies their contents, and excludes
+private manuscript files, backups and regenerated output folders. It does not
+run the samplers or upload anything. The `dist/` folder is excluded from Git.
+If the archive already exists, the script stops rather than overwriting it;
+use `--output=dist/reproduction_package_updated.zip` to choose another filename.
 
 ## Further information
 

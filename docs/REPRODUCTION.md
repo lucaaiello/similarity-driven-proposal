@@ -111,7 +111,10 @@ writes a new diagnostic subfolder; it is not needed for the reported displays.
 
 Input MD5s are in `reproduce/inputs_md5.csv`; original experiment receipts are
 also retained. `.gitattributes` prevents checkout line-ending conversion from
-invalidating source hashes. The journal archive adds per-member SHA-256 hashes.
+invalidating source hashes. The separately generated standalone reproduction
+archive adds per-file SHA-256 hashes; see the archive instructions in the
+[root README](../README.md#create-a-standalone-reproduction-archive). This ZIP
+is not tracked in GitHub and is not needed when using a complete Git LFS clone.
 Numerical reproduction does not imply seeded trajectory identity across compilers
 or new evidence of convergence. Historical sampling times are observations,
 not runtimes of the local postprocessing command.

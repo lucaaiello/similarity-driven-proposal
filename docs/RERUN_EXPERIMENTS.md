@@ -1,7 +1,10 @@
-# Optional sampling runs
+# Run the samplers again
 
-These commands execute MCMC and can compile C++. They are not needed for
-`Rscript reproduce/run.R`, which uses the saved results. Run from the repository
+These commands run the MCMC samplers again to generate new simulation or
+application results. They can take hours or days and may compile C++ code.
+They are not needed to rebuild the reported tables and figures:
+`Rscript reproduce/run.R` does that using the included saved results.
+Run the commands below from the repository
 root with Rcpp, RcppArmadillo, RcppEigen and the packages checked by each driver;
 on Windows use matching Rtools. New results go to each experiment's
 `Results/New_Run/` and do not replace the completed results.
