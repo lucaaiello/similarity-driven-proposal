@@ -3,7 +3,7 @@ a<-commandArgs(TRUE)
 opt<-function(k,d="") {x<-grep(paste0("^--",k,"="),a,value=TRUE);if(length(x))sub(paste0("^--",k,"="),"",x[1])else d}
 out<-opt("output");stopifnot(nzchar(out))
 dest<-file.path(out,"tables");dir.create(dest,recursive=TRUE,showWarnings=FALSE)
-g<-"New_simulations/outputs/matched_gaussian_20261007_163020"
+g<-"Simulations"
 rd<-function(p)read.csv(p,check.names=FALSE)
 avg<-function(d,by,vars)aggregate(d[vars],d[by],mean,na.rm=TRUE)
 sm<-function(d,by,vars) {
@@ -21,34 +21,34 @@ sim<-function(f)rd(file.path(dest,"simulation",f))
 export("S3_exact_gaussian",sim("table_exact_reference.csv"))
 export("S4_scaling",sim("table_highdim_p1000.csv"))
 export("S6_correlated_moves",sim("table_correlated_local_moves.csv"))
-high<-rd(file.path(g,"scaling/chain_metrics.csv"));high<-high[high$dimension==1000,]
+high<-rd(file.path(g,"Gaussian_Scaling/Results/chain_metrics.csv"));high<-high[high$dimension==1000,]
 hvars<-c("final_lambda","mean_proposal_effective_neighbors","acceptance_rate")
 h<-sm(avg(high,c("dataset","method"),hvars),"method",hvars)
-p<-rd(file.path(g,"scaling/pip_estimates.csv"));p<-p[p$dimension==1000,]
+p<-rd(file.path(g,"Gaussian_Scaling/Results/pip_estimates.csv"));p<-p[p$dimension==1000,]
 range1<-function(x)diff(range(x))
 pr<-aggregate(pip~dataset+method+variable,p,range1)
 pr<-avg(pr,c("dataset","method"),"pip");pr<-avg(pr,"method","pip")
 names(pr)[2]<-"mean_predictor_pip_range"
 export("S5_scaling_diagnostics",merge(h,pr,by="method"))
 # S7 and S8: keep adaptive score results distinct from the fixed-lambda grid.
-e<-rd(file.path(g,"exact_score/chain_metrics.csv"));e<-e[e$regime=="online",]
+e<-rd(file.path(g,"Exact_Score_Sensitivity/Results/chain_metrics.csv"));e<-e[e$regime=="online",]
 e$robust_ess_second<-pmin(e$ess_model_size_per_second,e$ess_log_target_per_second)
 ev<-c("lambda_final","mean_effective_neighbors","robust_ess_second","mean_pip_error","total_variation")
 es<-sm(avg(e,c("dataset","score"),ev),"score",ev)
-al<-rd(file.path(g,"exact_score/score_alignment.csv"))
+al<-rd(file.path(g,"Exact_Score_Sensitivity/Results/score_alignment.csv"))
 al<-sm(al,"score","posterior_weighted_rank_correlation")
 export("S7_exact_score",merge(es,al,by="score"))
-corr<-rd(file.path(g,"correlated_score/chain_metrics.csv"))
+corr<-rd(file.path(g,"Correlated_Score_Sensitivity/Results/chain_metrics.csv"))
 corr$robust_ess_second<-pmin(corr$ess_model_size_per_second,corr$ess_log_target_per_second)
 cv<-c("lambda_final","mean_effective_neighbors","acceptance","robust_ess_second","rhat_model_size","rhat_log_target","mean_active_pip")
 cs<-sm(avg(corr,c("dataset","score"),cv),"score",cv)
-cp<-rd(file.path(g,"correlated_score/pip_estimates.csv"))
+cp<-rd(file.path(g,"Correlated_Score_Sensitivity/Results/pip_estimates.csv"))
 cp<-aggregate(pip~dataset+score+variable,cp,range1)
 cp<-avg(avg(cp,c("dataset","score"),"pip"),"score","pip")
 names(cp)[2]<-"mean_predictor_pip_range"
 export("S8_correlated_score",merge(cs,cp,by="score"))
 # Main2/S12/S13: average chains within dataset before MCSE over datasets.
-dm<-rd("New_simulations/outputs/dm_gagnon_comparison/combined_chain_metrics.csv")
+dm<-rd("Simulations/Dirichlet_Multinomial/Comparison/Results/Combined/combined_chain_metrics.csv")
 dm$robust_ess_second<-pmin(dm$ess_model_size_per_second,dm$ess_log_posterior_per_second)
 dv<-c("seconds","acceptance_flip","acceptance_local","robust_ess_second","rhat_model_size","rhat_log_posterior",
  "pip_rmse","true_positive_rate_05","false_positive_rate_05","active_coefficient_rmse","active_coefficient_coverage")
@@ -66,9 +66,9 @@ ps<-do.call(rbind,lapply(parts,function(z)data.frame(score_steps=z$score_steps[1
  max_rhat=safe(z$rhat,max),min_bulk_ess=safe(z$bulk_ess,min),max_mcse_mean=safe(z$mcse_mean,max))))
 export("S10_parameter_diagnostics",ps[order(ps$score_steps,ps$quantity),])
 # S11: chain means within each of the five datasets, then means/MCSEs.
-depth<-"New_simulations/outputs/dm_fitting_depth_20261008_104824"
+depth<-"Simulations/Dirichlet_Multinomial/Fitting_Depth/Results"
 ss<-lapply(c(1,5,10),function(b) {
-  z<-rd(file.path(depth,paste0("depth_",b),"chain_metrics.csv"))
+  z<-rd(file.path(depth,c(`1`="One_Step",`5`="Five_Steps",`10`="Ten_Steps")[[as.character(b)]],"chain_metrics.csv"))
   z$robust_ess_second<-pmin(z$ess_model_size_per_second,z$ess_log_posterior_per_second)
   v<-c("seconds","robust_ess_second","pip_rmse","rhat_model_size","rhat_log_posterior")
   d<-avg(z,"dataset",v);r<-sm(transform(d,budget=b),"budget",v)
@@ -80,7 +80,7 @@ ss<-lapply(c(1,5,10),function(b) {
 app<-file.path(dest,"application")
 export("main3_application_comparison",rd(file.path(app,"method_comparison.csv")))
 export("main4_application_associations",rd(file.path(app,"association_method_ranges.csv")))
-s<-readRDS("New_simulations/outputs/dm_apt50k_fresh_slurm_v1/summary/summary.rds")
+s<-readRDS("Real Data Analysis/Results/summary.rds")
 chains<-s$tables$chain_metrics
 chains$hours<-chains$seconds_including_startup/3600
 chains$cold_exchange_acceptance<-chains$cold_swaps_post/25000

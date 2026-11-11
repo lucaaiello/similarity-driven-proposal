@@ -21,9 +21,10 @@ unless stated otherwise.
 | S4 | `real_data_associations` |
 | S5 | `real_data_retained_parameters` |
 
-Synthetic figures use `make_manuscript_simulation_figures_ggplot.R`; application
-figures use `make_manuscript_real_data_figures.R` and its ggplot helper. All share
-`manuscript_plot_theme.R`. The additional combined plots in `supporting_figures/`
+Synthetic figures use `Simulations/Figures_and_Tables/plot_results.R`; application
+figures use `Real Data Analysis/Figures_and_Tables/create_figures.R` and
+`Real Data Analysis/Figures_and_Tables/plot_figures.R`. All share
+`Simulations/Figures_and_Tables/plot_theme.R`. The additional combined plots in `supporting_figures/`
 are base-graphics exports supporting the numerical-summary workflow, not the
 manuscript's current panel layout.
 
@@ -86,8 +87,8 @@ contains the model diagram. Full manuscript documents are not distributed here.
 
 ## Runtime, commands and verification
 
-The default typically takes one to a few minutes on a recent laptop. Measured
-validation timings are in `validation_timings.csv`. Allow several GB of free RAM
+The default typically takes one to a few minutes on a recent laptop. Each run
+records its own step runtimes in the output folder's `timings.csv`. Allow several GB of free RAM
 for the 232 MiB application summary and plotting/diagnostic arrays. Full
 parameter-diagnostic recomputation takes additional time; no sampler is run.
 
@@ -98,13 +99,15 @@ destination after fixing the cause. The master command refuses overwriting.
 Individual figure-only commands with separate destinations:
 
 ```sh
-Rscript New_simulations/make_manuscript_simulation_figures_ggplot.R --image-dir=reproduced_figures
-Rscript New_simulations/make_manuscript_real_data_figures.R --output-root=reproduced_application
+Rscript Simulations/Figures_and_Tables/plot_results.R --image-dir=reproduced_figures
+Rscript "Real Data Analysis/Figures_and_Tables/create_figures.R" --output-root=reproduced_application
 ```
 
-Their legacy defaults write to `JCGS_submission/Images`, so specify destinations
-when preserving those assets. Additional assessment code is retained in
-`dm_apt50k_postprocessing/analyze_summary.R`; it is not needed for the displays.
+The simulation plotting default writes to `reproduced/figures`. The application
+plotting default writes to `reproduced_application`; neither default targets the
+private manuscript folder. Additional assessment code is
+`Real Data Analysis/assess_results.R`, which reads the same saved summary and
+writes a new diagnostic subfolder; it is not needed for the reported displays.
 
 Input MD5s are in `reproduce/inputs_md5.csv`; original experiment receipts are
 also retained. `.gitattributes` prevents checkout line-ending conversion from
@@ -112,3 +115,9 @@ invalidating source hashes. The journal archive adds per-member SHA-256 hashes.
 Numerical reproduction does not imply seeded trajectory identity across compilers
 or new evidence of convergence. Historical sampling times are observations,
 not runtimes of the local postprocessing command.
+
+Application source receipts are checked against the actual original files inside
+`Real Data Analysis/Provenance/original_sources.zip`. Their recorded hashes and
+the completed summary are unchanged. New sampling instead requires fresh live-
+source and runtime checks. This is a provenance/path adaptation, not a claim of
+a newly completed MCMC audit.

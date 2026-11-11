@@ -32,3 +32,10 @@
 /JCGS_submission/cover_letter.*
 /JCGS_submission/
 /asa_jcgs.bst
+
+# New application checkpoints and cluster job logs are local run artifacts.
+/Real Data Analysis/Results/New_Run/
+/Real Data Analysis/Cluster/Logs/
+/Real Data Analysis/Cluster/submitted_jobs.txt
+/Real Data Analysis/Validation/Results/
+/Real Data Analysis/Results/Diagnostics/New_Run/

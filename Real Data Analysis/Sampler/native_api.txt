@@ -1,0 +1,19 @@
+APPLICATION NATIVE ENGINE
+=========================
+dm_sampler.cpp implements the native local transitions used by the completed
+application. Its contents and the two local numerical headers are unchanged.
+The generation/reference receipts are preserved under ../Provenance/ and the
+original files can be verified inside the original source archive.
+
+runtime.R initializes and reuses native contexts via apt_context_create,
+apt_context_info and apt_context_step. The contexts cache conditional numerical
+work; native pointer state is reconstructible and is not serialized into saved
+continuation states. The same local transition kernels, finite fitting caps,
+likelihood powers and priors are used. Native helper/audit exports remain
+available for the bounded implementation checks.
+
+The R analysis wrapper controls fresh starts, exchange sweeps, temperature and
+diversity adaptation, RNG streams, checkpointing and source/runtime gates.
+Use the documented driver and target-runtime checks rather than calling the
+native helpers as an alternative analysis. Reference engines and deterministic
+fixtures are under ../Validation/; they are not production entry points.

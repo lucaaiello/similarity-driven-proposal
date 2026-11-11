@@ -1,151 +1,132 @@
 # Similarity-Driven Proposals for MCMC Algorithms on Discrete Spaces
 
-Reproducibility materials for the manuscript by Luca Aiello, Raffaele Argiento,
-Alexandros Beskos and Maria De Iorio.
+Code, data and saved results accompanying the manuscript.
 
-**The saved results are included.** Rebuilding the reported tables and figures
-requires no MCMC, C++ compilation, Hoffman2 access or cluster submission.
+**You can reproduce the reported tables and figures without rerunning the
+samplers.** The saved-results workflow runs locally and needs no compiler or
+cluster access.
 
-## Get the complete materials
+## Quick start
 
-For a Git clone, install [Git LFS](https://git-lfs.com/) first:
+### 1. Get the files and saved results
+
+If you received `reproduction_package.zip`, extract it. The archive contains
+the complete data and saved results.
+
+For a GitHub clone, install [Git LFS](https://git-lfs.com/) before cloning:
 
 ```sh
 git lfs install
-git clone https://github.com/lucaaiello/similarity-driven-proposal.git
-cd similarity-driven-proposal
+```
+
+Clone using the URL on the repository's GitHub page. Open a terminal in the
+downloaded repository folder, then retrieve the large saved result:
+
+```sh
 git lfs pull
 ```
 
-The 232 MiB application `summary.rds` is stored through Git LFS.
-A small text pointer is not the saved result. Alternatively, extract the complete
-`reproduction_package.zip` supplied with the article: it contains the actual
-result objects and needs no Git LFS. A GitHub source ZIP may contain LFS pointers.
+The application file `Real Data Analysis/Results/summary.rds` should be about
+232 MiB. A small text file in its place is a Git LFS pointer, not the result.
+GitHub's **Download ZIP** may contain pointers; use Git LFS or the complete
+reproduction archive in that case.
 
-## Software
+### 2. Install the R packages
 
-Saved-results reproduction was tested with **R 4.4.1**, `ggplot2` and `posterior`.
-No compiler is required. Install the packages in R:
+The workflow was tested with **R 4.4.1**. Run this once in R:
 
 ```r
 install.packages(c("ggplot2", "posterior"), repos = "https://cloud.r-project.org")
 ```
 
-The tested versions/environment are in [docs/validated_environment.txt](docs/validated_environment.txt).
-Each reproduction run also records its own environment. Cairo PDF support is
-required (`capabilities("cairo")`); the tested Windows R installation provides it.
-PDF metadata/font rendering may differ across systems even when numbers agree.
+Allow several GB of free RAM. R must support Cairo PDF output; you can check
+this with `capabilities("cairo")` in R.
 
-## Reproduce every table and figure
+### 3. Reproduce the tables and figures
 
-Open a terminal **in the repository root**, then run:
+From the **repository root**—the folder containing this README and the four
+folders listed below—run:
 
 ```sh
 Rscript reproduce/run.R
 ```
 
-On Windows, if `Rscript` is not on your PATH:
+On Windows, if `Rscript` is not recognized, use your R installation's full
+path. For example, in PowerShell:
 
 ```powershell
 & 'C:\Program Files\R\R-4.4.1\bin\Rscript.exe' reproduce/run.R
 ```
 
-This creates a new `reproduced/` directory and refuses to overwrite one. To repeat
-the check, use `Rscript reproduce/run.R --output=reproduced_second_check`.
+Adjust the installation path if your R version or location differs. The
+repository itself can be stored anywhere; R scripts use paths relative to
+the repository root.
 
-| Output | Contents |
+The default run usually takes one to a few minutes on a laptop. It creates
+`reproduced/` and leaves the supplied results untouched.
+
+## Find the outputs
+
+| Location inside `reproduced/` | Contents |
 |---|---|
-| `status.txt` | `COMPLETE` only after every step succeeds |
-| `figures/` | Main/supplementary PDF and PNG panels; model diagram PDF |
-| `tables/` | Full-precision CSVs for all computational tables; static definition tables as TeX |
-| `tables/application_latex/` | Formatted application table exports |
-| `table_verification.csv` | Checks of all 16 computational tables against the manuscript |
-| `timings.csv`, `logs/` | Step runtimes, exit status and logs |
-| `sessionInfo.txt`, `package_versions.csv` | Environment used for this run |
+| `figures/` | Main and supplementary figures in PDF and PNG formats; the model diagram is PDF only |
+| `tables/` | Numerical table summaries as CSVs, plus formatted table exports |
+| `table_verification.csv` | Agreement checks for all 16 numerical tables |
+| `status.txt` | `COMPLETE` when every step has passed |
+| `logs/`, `timings.csv` | Step logs and runtimes |
+| `sessionInfo.txt`, `package_versions.csv` | Software environment used |
 
-The workflow verifies saved-input checksums, recalculates the numerical summaries
-and compares every computational table with its explicitly typeset counterpart.
-See [docs/REPRODUCTION.md](docs/REPRODUCTION.md) for the exact figure/table map,
-aggregation and rounding conventions. Original results and manuscript assets are
-not overwritten. The manuscript tables remain explicitly written in TeX; no
-generated table is automatically inserted into them.
+The exact figure and table mapping is in
+[docs/REPRODUCTION.md](docs/REPRODUCTION.md).
 
-The default uses saved parameter-level diagnostics for Table S10. To recompute
-those diagnostics from saved full fits as well:
+To repeat the workflow, choose a new output folder:
+
+```sh
+Rscript reproduce/run.R --output=reproduced_second_check
+```
+
+Existing output folders are preserved. If a step fails, inspect its log in
+`logs/`; `status.txt` remains `INCOMPLETE`.
+
+## Repository guide
+
+| Folder | What you will find |
+|---|---|
+| [Simulations/](Simulations/README.md) | Simulation experiments, their samplers and saved results. Each experiment has its own instructions and `Results/` folder. |
+| [Real Data Analysis/](Real%20Data%20Analysis/README.md) | Diet–microbiome data, the application sampler, saved results, diagnostics and optional cluster scripts. |
+| [reproduce/](reproduce/) | The shared workflow for rebuilding and checking all reported tables and figures. |
+| [docs/](docs/) | Data descriptions, detailed reproduction instructions and instructions for new sampling runs. |
+
+## More options
+
+The default workflow uses saved parameter diagnostics. To recompute them from
+the saved fits too, use:
 
 ```sh
 Rscript reproduce/run.R --output=reproduced_full_diagnostics --recompute-parameter-diagnostics=true
 ```
 
-This also runs no sampler or optimizer, but takes more time. The default workflow
-takes roughly one to a few minutes on a laptop and requires several GB of free
-RAM; measured timings are in [docs/validation_timings.csv](docs/validation_timings.csv).
+This takes additional time but still runs no sampler or optimizer.
 
-## Organization and saved results
+For new simulation or application runs, follow
+[docs/RERUN_EXPERIMENTS.md](docs/RERUN_EXPERIMENTS.md). Those commands execute
+MCMC and may require compilation; they are optional for reproducing the paper.
 
-| Location | Purpose |
-|---|---|
-| `reproduce/` | Master command, table calculations/checks, input manifest, archive builder |
-| `docs/` | Result map, data provenance, environment and optional rerun instructions |
-| `reproduce/reference/` | Table-only reference snippets and model diagram; no manuscript documents |
-| `New_simulations/` | Experiment drivers, helpers, audits and saved outputs |
-| `Simulations/` | Gaussian C++ samplers used by the final experiments |
-| `Real Data Analysis/Data/` | Supplied counts, scaled dietary covariates and labels |
-
-Saved-result directories below are under `New_simulations/outputs/`:
-
-| Analysis | Directory |
-|---|---|
-| All five matched Gaussian experiments | `matched_gaussian_20261007_163020/` |
-| Synthetic DM uniform/similarity methods | `dm_online_adaptive_primary_20datasets/` |
-| Synthetic DM Gagnon--Laplace comparator | `dm_gagnon_laplace_20datasets/` |
-| Combined synthetic DM comparison | `dm_gagnon_comparison/` |
-| DM fitting-depth study, including full fits | `dm_fitting_depth_20261008_104824/` |
-| Final application: 12 completed ladders | `dm_apt50k_fresh_slurm_v1/summary/` |
-
-The application summary contains 25,000 retained cold draws per ladder after
-25,000 burn-in sweeps, with no thinning. There are four independent cold chains
-per method. The ten temperature replicas are not ten independent posterior
-chains. All 30 genera enter the model; summaries without Prevotella use those
-same full-model draws and do not involve a refit. Remaining diagnostic
-qualifications are preserved. Reproduction checks calculations, not new
-convergence. Full remote continuation checkpoints are not all included locally.
-
-Paths are preserved because original provenance checks depend on them.
-`dm_apt_runtime_optimization` and retained `dm_adaptive_tempering` modules are
-dependencies of the final `dm_apt50k_fresh_v1` workflow, not alternative pilot
-instructions. See [docs/DATA.md](docs/DATA.md) and
-[docs/RERUN_EXPERIMENTS.md](docs/RERUN_EXPERIMENTS.md). Sampling is optional and
-much more expensive than the saved-results workflow.
-
-## Manuscript documents
-
-The submission documents, PDFs, bibliography and correspondence are excluded
-from this repository. Only table reference snippets needed for numerical checks
-and the static model diagram are included under `reproduce/reference/`.
-The saved-results workflow works without the manuscript folder.
-
-## Journal archive and release
-
-Using Python 3.9 or later:
+To build a standalone ZIP containing the code, data and saved results, use
+Python 3.9 or later:
 
 ```sh
 python reproduce/prepare_archive.py
 ```
 
-This builds `dist/reproduction_package.zip` and its SHA-256 checksum, verifies
-every member, and excludes Git history, local backups, regenerated results,
-response/cover letters and internal housekeeping. It rejects LFS pointers.
-It performs no upload, commit or publication.
+The verified archive and its checksum are written to `dist/`. Existing archives
+are preserved; the script does not upload anything.
 
-Licensing is intentionally undecided: [LICENSING.md](LICENSING.md). Third-party
-data retain their own terms. Before release, select the code license with the
-coauthors, confirm data redistribution terms, publish the prepared revision,
-and archive a fixed release with a persistent identifier. Supply the complete
-code/data archive to the journal as well as the repository link.
+## Further information
 
-See [docs/JOURNAL_CHECKLIST.md](docs/JOURNAL_CHECKLIST.md), the
-[JCGS instructions](https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=ucgs20)
-and the [ASA discussion of JCGS reproducibility](https://magazine.amstat.org/blog/2017/10/01/dianne-cook/).
-The current submission instructions should be checked at upload; this package
-does not claim journal certification.
+- [Data and saved-result descriptions](docs/DATA.md)
+- [Figure/table mapping and calculation details](docs/REPRODUCTION.md)
+- [Instructions for running new experiments](docs/RERUN_EXPERIMENTS.md)
+- [Tested software environment](docs/validated_environment.txt)
+- [Licensing status](LICENSING.md) — a software license has not yet been selected;
+  third-party data retain their own terms.

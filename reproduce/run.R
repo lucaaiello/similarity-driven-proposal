@@ -12,7 +12,7 @@ if(file.exists(out))stop("Choose a NEW output directory; existing results are pr
 needed<-c("ggplot2","posterior")
 missing<-needed[!vapply(needed,requireNamespace,TRUE,quietly=TRUE)]
 if(length(missing))stop("Install required packages first: ",paste(missing,collapse=", "))
-summary<-"New_simulations/outputs/dm_apt50k_fresh_slurm_v1/summary/summary.rds"
+summary<-"Real Data Analysis/Results/summary.rds"
 if(!file.exists(summary)||file.info(summary)$size<1000)
   stop("Real-data saved result missing or an LFS pointer. Run git lfs pull, or extract the complete archive.")
 source("reproduce/check_inputs.R")
@@ -29,18 +29,18 @@ step<-function(name,script,arguments=character()) {
   write.csv(do.call(rbind,timings),file.path(out,"timings.csv"),row.names=FALSE)
   if(status!=0L)stop("Postprocessing failed: ",name,". Inspect ",file.path(out,"logs",paste0(name,".log")))
 }
-step("simulation_summaries","New_simulations/make_manuscript_simulation_figures.R",
+step("simulation_summaries","Simulations/Figures_and_Tables/summarize_results.R",
   c(paste0("--image-dir=",out,"/supporting_figures"),paste0("--summary-dir=",out,"/tables/simulation")))
-step("simulation_figures","New_simulations/make_manuscript_simulation_figures_ggplot.R",
+step("simulation_figures","Simulations/Figures_and_Tables/plot_results.R",
   paste0("--image-dir=",out,"/figures"))
-step("application","New_simulations/make_manuscript_real_data_figures.R",paste0("--output-root=",out))
-step("dm_dataset_diagnostics","New_simulations/summarize_dm_revision_diagnostics.R",
+step("application","Real Data Analysis/Figures_and_Tables/create_figures.R",paste0("--output-root=",out))
+step("dm_dataset_diagnostics","Simulations/Dirichlet_Multinomial/Comparison/summarize_diagnostics.R",
   paste0("--output=",out,"/tables/dm_dataset_diagnostics"))
-parameter_input<-"New_simulations/outputs/dm_fitting_depth_20261008_104824/parameter_diagnostics_20261009_221750/parameter_diagnostics.csv"
+parameter_input<-"Simulations/Dirichlet_Multinomial/Fitting_Depth/Results/Parameter_Diagnostics/parameter_diagnostics.csv"
 recompute<-getarg("recompute-parameter-diagnostics","false")
 if(!recompute%in%c("true","false"))stop("Use true or false for --recompute-parameter-diagnostics")
 if(recompute=="true") {
-  step("parameter_diagnostics","New_simulations/summarize_dm_parameter_diagnostics.R",
+  step("parameter_diagnostics","Simulations/Dirichlet_Multinomial/Fitting_Depth/summarize_parameters.R",
     paste0("--output=",out,"/tables/recomputed_parameters"))
   parameter_input<-file.path(out,"tables/recomputed_parameters/parameter_diagnostics.csv")
 }

@@ -1,0 +1,24 @@
+# Gaussian scaling
+
+Predictor dimensions 50, 100, 250, 500 and 1000. Supplementary Figure S1 and Tables S4–S5.
+
+- `run.R`: experiment entry point. This executes MCMC; it is not needed to reproduce saved results.
+- `Results/`: completed experiment results. Files are preserved from the original runs.
+- Shared samplers and numerical helpers are in the parent `Simulations/` folder.
+
+From the repository root, regenerate all reported tables/figures without MCMC:
+
+```sh
+Rscript reproduce/run.R
+```
+
+To rerun this experiment, first run the required checks in `Simulations/Validation`, then invoke:
+
+```sh
+Rscript Simulations/Gaussian_Scaling/run.R --mode=full
+```
+
+New sampling outputs go to `Results/New_Run`; choose another `--output` for another run.
+Completed results are never overwritten by these defaults. Numerical receipts and
+source snapshots within `Results` retain their original recorded paths/names;
+these describe the completed run, rather than the current directory structure.

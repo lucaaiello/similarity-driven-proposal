@@ -1,5 +1,5 @@
-# Preserve exact bytes: scientific provenance checks hash the original sources.
+# Preserve exact bytes for source/data provenance.
 * -text
 
-# The saved application summary exceeds GitHub's ordinary per-file limit.
-New_simulations/outputs/dm_apt50k_fresh_slurm_v1/summary/summary.rds filter=lfs diff=lfs merge=lfs -text
+# Original saved application result, stored through Git LFS.
+"Real Data Analysis/Results/summary.rds" filter=lfs diff=lfs merge=lfs -text
