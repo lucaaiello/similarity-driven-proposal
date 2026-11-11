@@ -1,0 +1,2 @@
+"states","tolerance_sum","tolerance_repeat","tolerance_reference","maximum_sum_error","repeat_max_abs","reference_max_abs","passed"
+4,1e-12,1e-10,0.01,2.22044604925031e-16,0,0,TRUE

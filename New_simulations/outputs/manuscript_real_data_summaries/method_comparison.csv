@@ -1,0 +1,4 @@
+"method","label","median_hours","model_size_rhat","prev_size_rhat","other_model_size_rhat","subject4014_rhat","other_genera_median_max_spread","all_genera_median_max_spread","prev_spread_ge_half"
+"online_similarity_flip","Similarity flip",50.0314909722222,1.10514229556041,1.70080600436821,1.01230650916876,1.30528753735526,0.03928,0.04,26
+"online_similarity_local","Similarity + swap",53.2586579166667,1.05957121399242,1.317373753479,1.01562540957862,1.49208067998773,0.021,0.02176,41
+"uniform_flip","Uniform flip",3.43861194444444,1.02504803724117,1.03355720478877,1.01878578646854,1.03573396110175,0.0977600000000001,0.10506,34

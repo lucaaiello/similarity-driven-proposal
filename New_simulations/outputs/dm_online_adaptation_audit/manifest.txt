@@ -1,0 +1,5 @@
+Audit scope:
+- independent normalization check for balanced and legacy one-flip probabilities
+- direction-mass and probability-sum invariants
+- short online-adaptation smoke test and output-shape checks
+- this is not a Gaussian rank-one audit; the DM PMLE/Hessian calculations remain numerical

@@ -1,0 +1,23 @@
+mode: full
+stage: core
+dataset_ids: 1,2,3,4,5
+methods: optimized_similarity_fixed
+chains: 3
+runs: 5000
+burn: 2500
+thin: 1
+n: 70
+J: 5
+P: 18
+predictor_correlation: AR(1), rho=0.65
+save_full_fits: TRUE
+core_score_optimizer_maxit: 1
+core_cache_override: true
+current intercept covariance schedule: adapted during burn-in, then frozen
+production adaptation: category-wise online diminishing diversity adaptation
+adaptation gain: 0.5*(100+m)^(-0.6)
+effective-neighbor target: min(P,max(5,0.025*P))
+optimized proposal: balanced birth/death directions plus 2% direction-preserving uniform mixture
+continuous coefficient proposal: PMLE/Hessian fixed across uniform/similarity ablations
+Gagnon comparator: conditional posterior Laplace model weights with Barker balancing and matching posterior-mode/Hessian Gaussian RJ proposal
+local graph: four strongest empirical absolute correlations per predictor

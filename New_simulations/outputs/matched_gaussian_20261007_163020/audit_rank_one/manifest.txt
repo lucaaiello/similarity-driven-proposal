@@ -1,0 +1,5 @@
+states_per_case: 100
+cases: 27
+comparisons: 16200
+tolerance: 1e-09
+passed: TRUE

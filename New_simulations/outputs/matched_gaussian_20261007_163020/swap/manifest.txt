@@ -1,0 +1,14 @@
+mode: full
+n: 200
+p: 200
+datasets: 30
+chains: 4
+runs: 50000
+burn: 10000
+blocks: 10
+block_size: 5
+rho: 0.95
+graph_threshold: 0.7
+engine: production rank-one flip and swap scoring
+adaptation: genuine online diminishing diversity adaptation throughout the run, matching the production experiments
+timing: sampler time reported separately from one-off graph construction time

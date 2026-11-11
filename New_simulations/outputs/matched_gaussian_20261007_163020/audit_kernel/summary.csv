@@ -1,0 +1,369 @@
+"check","error","tolerance","passed"
+"regular f production target",2.1316282072803e-14,1e-08,TRUE
+"regular f production/benchmark",0,1e-08,TRUE
+"regular f positive full support",0,0,TRUE
+"regular f normalization",1.11022302462516e-16,1e-08,TRUE
+"regular f detailed balance",3.05311331771918e-16,1e-08,TRUE
+"regular f stationarity",9.99200722162641e-16,1e-08,TRUE
+"regular f 2 birth mass",0,1e-08,TRUE
+"regular f 3 birth mass",0,1e-08,TRUE
+"regular f 4 birth mass",0,1e-08,TRUE
+"regular f 5 birth mass",0,1e-08,TRUE
+"regular f 6 birth mass",5.55111512312578e-17,1e-08,TRUE
+"regular f 7 birth mass",0,1e-08,TRUE
+"regular f 8 birth mass",0,1e-08,TRUE
+"regular f 9 birth mass",0,1e-08,TRUE
+"regular f 10 birth mass",0,1e-08,TRUE
+"regular f 11 birth mass",0,1e-08,TRUE
+"regular f 12 birth mass",1.11022302462516e-16,1e-08,TRUE
+"regular f 13 birth mass",0,1e-08,TRUE
+"regular f 14 birth mass",0,1e-08,TRUE
+"regular f 15 birth mass",0,1e-08,TRUE
+"regular f 16 birth mass",0,1e-08,TRUE
+"regular f 17 birth mass",0,1e-08,TRUE
+"regular f 18 birth mass",0,1e-08,TRUE
+"regular f 19 birth mass",1.11022302462516e-16,1e-08,TRUE
+"regular f 20 birth mass",0,1e-08,TRUE
+"regular f 21 birth mass",1.11022302462516e-16,1e-08,TRUE
+"regular f 22 birth mass",5.55111512312578e-17,1e-08,TRUE
+"regular f 23 birth mass",5.55111512312578e-17,1e-08,TRUE
+"regular f 24 birth mass",0,1e-08,TRUE
+"regular f 25 birth mass",0,1e-08,TRUE
+"regular f 26 birth mass",0,1e-08,TRUE
+"regular f 27 birth mass",5.55111512312578e-17,1e-08,TRUE
+"regular f 28 birth mass",0,1e-08,TRUE
+"regular f 29 birth mass",0,1e-08,TRUE
+"regular f 30 birth mass",0,1e-08,TRUE
+"regular f 31 birth mass",0,1e-08,TRUE
+"regular bic production target",2.1316282072803e-14,1e-08,TRUE
+"regular bic production/benchmark",0,1e-08,TRUE
+"regular bic positive full support",0,0,TRUE
+"regular bic normalization",1.11022302462516e-16,1e-08,TRUE
+"regular bic detailed balance",3.19189119579733e-16,1e-08,TRUE
+"regular bic stationarity",9.99200722162641e-16,1e-08,TRUE
+"regular bic 2 birth mass",0,1e-08,TRUE
+"regular bic 3 birth mass",0,1e-08,TRUE
+"regular bic 4 birth mass",0,1e-08,TRUE
+"regular bic 5 birth mass",0,1e-08,TRUE
+"regular bic 6 birth mass",5.55111512312578e-17,1e-08,TRUE
+"regular bic 7 birth mass",5.55111512312578e-17,1e-08,TRUE
+"regular bic 8 birth mass",0,1e-08,TRUE
+"regular bic 9 birth mass",0,1e-08,TRUE
+"regular bic 10 birth mass",0,1e-08,TRUE
+"regular bic 11 birth mass",1.11022302462516e-16,1e-08,TRUE
+"regular bic 12 birth mass",5.55111512312578e-17,1e-08,TRUE
+"regular bic 13 birth mass",1.11022302462516e-16,1e-08,TRUE
+"regular bic 14 birth mass",0,1e-08,TRUE
+"regular bic 15 birth mass",5.55111512312578e-17,1e-08,TRUE
+"regular bic 16 birth mass",0,1e-08,TRUE
+"regular bic 17 birth mass",5.55111512312578e-17,1e-08,TRUE
+"regular bic 18 birth mass",0,1e-08,TRUE
+"regular bic 19 birth mass",5.55111512312578e-17,1e-08,TRUE
+"regular bic 20 birth mass",0,1e-08,TRUE
+"regular bic 21 birth mass",0,1e-08,TRUE
+"regular bic 22 birth mass",0,1e-08,TRUE
+"regular bic 23 birth mass",0,1e-08,TRUE
+"regular bic 24 birth mass",0,1e-08,TRUE
+"regular bic 25 birth mass",1.11022302462516e-16,1e-08,TRUE
+"regular bic 26 birth mass",0,1e-08,TRUE
+"regular bic 27 birth mass",0,1e-08,TRUE
+"regular bic 28 birth mass",0,1e-08,TRUE
+"regular bic 29 birth mass",0,1e-08,TRUE
+"regular bic 30 birth mass",0,1e-08,TRUE
+"regular bic 31 birth mass",0,1e-08,TRUE
+"regular marginal positive full support",0,0,TRUE
+"regular marginal normalization",1.11022302462516e-16,1e-08,TRUE
+"regular marginal detailed balance",3.05311331771918e-16,1e-08,TRUE
+"regular marginal stationarity",9.99200722162641e-16,1e-08,TRUE
+"regular marginal 2 birth mass",0,1e-08,TRUE
+"regular marginal 3 birth mass",5.55111512312578e-17,1e-08,TRUE
+"regular marginal 4 birth mass",0,1e-08,TRUE
+"regular marginal 5 birth mass",1.11022302462516e-16,1e-08,TRUE
+"regular marginal 6 birth mass",5.55111512312578e-17,1e-08,TRUE
+"regular marginal 7 birth mass",0,1e-08,TRUE
+"regular marginal 8 birth mass",0,1e-08,TRUE
+"regular marginal 9 birth mass",0,1e-08,TRUE
+"regular marginal 10 birth mass",0,1e-08,TRUE
+"regular marginal 11 birth mass",0,1e-08,TRUE
+"regular marginal 12 birth mass",0,1e-08,TRUE
+"regular marginal 13 birth mass",0,1e-08,TRUE
+"regular marginal 14 birth mass",0,1e-08,TRUE
+"regular marginal 15 birth mass",0,1e-08,TRUE
+"regular marginal 16 birth mass",0,1e-08,TRUE
+"regular marginal 17 birth mass",5.55111512312578e-17,1e-08,TRUE
+"regular marginal 18 birth mass",0,1e-08,TRUE
+"regular marginal 19 birth mass",0,1e-08,TRUE
+"regular marginal 20 birth mass",5.55111512312578e-17,1e-08,TRUE
+"regular marginal 21 birth mass",0,1e-08,TRUE
+"regular marginal 22 birth mass",0,1e-08,TRUE
+"regular marginal 23 birth mass",1.11022302462516e-16,1e-08,TRUE
+"regular marginal 24 birth mass",0,1e-08,TRUE
+"regular marginal 25 birth mass",0,1e-08,TRUE
+"regular marginal 26 birth mass",0,1e-08,TRUE
+"regular marginal 27 birth mass",0,1e-08,TRUE
+"regular marginal 28 birth mass",0,1e-08,TRUE
+"regular marginal 29 birth mass",5.55111512312578e-17,1e-08,TRUE
+"regular marginal 30 birth mass",0,1e-08,TRUE
+"regular marginal 31 birth mass",0,1e-08,TRUE
+"regular uniform positive full support",0,0,TRUE
+"regular uniform normalization",0,1e-08,TRUE
+"regular uniform detailed balance",1.31838984174237e-16,1e-08,TRUE
+"regular uniform stationarity",3.33066907387547e-16,1e-08,TRUE
+"regular exact_locally_balanced positive full support",0,0,TRUE
+"regular exact_locally_balanced normalization",2.22044604925031e-16,1e-08,TRUE
+"regular exact_locally_balanced detailed balance",4.30211422042248e-16,1e-08,TRUE
+"regular exact_locally_balanced stationarity",1.22124532708767e-15,1e-08,TRUE
+"regular bic_locally_balanced positive full support",0,0,TRUE
+"regular bic_locally_balanced normalization",2.22044604925031e-16,1e-08,TRUE
+"regular bic_locally_balanced detailed balance",4.37150315946155e-16,1e-08,TRUE
+"regular bic_locally_balanced stationarity",1.33226762955019e-15,1e-08,TRUE
+"dense f production target",3.5527136788005e-15,1e-08,TRUE
+"dense f production/benchmark",0,1e-08,TRUE
+"dense f positive full support",0,0,TRUE
+"dense f normalization",1.11022302462516e-16,1e-08,TRUE
+"dense f detailed balance",2.77555756156289e-17,1e-08,TRUE
+"dense f stationarity",2.77555756156289e-17,1e-08,TRUE
+"dense f 2 birth mass",0,1e-08,TRUE
+"dense f 3 birth mass",0,1e-08,TRUE
+"dense f 4 birth mass",0,1e-08,TRUE
+"dense f 5 birth mass",0,1e-08,TRUE
+"dense f 6 birth mass",0,1e-08,TRUE
+"dense f 7 birth mass",0,1e-08,TRUE
+"dense f 8 birth mass",0,1e-08,TRUE
+"dense f 9 birth mass",0,1e-08,TRUE
+"dense f 10 birth mass",0,1e-08,TRUE
+"dense f 11 birth mass",0,1e-08,TRUE
+"dense f 12 birth mass",0,1e-08,TRUE
+"dense f 13 birth mass",0,1e-08,TRUE
+"dense f 14 birth mass",0,1e-08,TRUE
+"dense f 15 birth mass",0,1e-08,TRUE
+"dense f 16 birth mass",0,1e-08,TRUE
+"dense f 17 birth mass",5.55111512312578e-17,1e-08,TRUE
+"dense f 18 birth mass",0,1e-08,TRUE
+"dense f 19 birth mass",0,1e-08,TRUE
+"dense f 20 birth mass",0,1e-08,TRUE
+"dense f 21 birth mass",0,1e-08,TRUE
+"dense f 22 birth mass",0,1e-08,TRUE
+"dense f 23 birth mass",0,1e-08,TRUE
+"dense f 24 birth mass",0,1e-08,TRUE
+"dense f 25 birth mass",0,1e-08,TRUE
+"dense f 26 birth mass",0,1e-08,TRUE
+"dense f 27 birth mass",0,1e-08,TRUE
+"dense f 28 birth mass",0,1e-08,TRUE
+"dense f 29 birth mass",0,1e-08,TRUE
+"dense f 30 birth mass",0,1e-08,TRUE
+"dense f 31 birth mass",0,1e-08,TRUE
+"dense bic production target",3.5527136788005e-15,1e-08,TRUE
+"dense bic production/benchmark",0,1e-08,TRUE
+"dense bic positive full support",0,0,TRUE
+"dense bic normalization",1.11022302462516e-16,1e-08,TRUE
+"dense bic detailed balance",2.77555756156289e-17,1e-08,TRUE
+"dense bic stationarity",2.77555756156289e-17,1e-08,TRUE
+"dense bic 2 birth mass",0,1e-08,TRUE
+"dense bic 3 birth mass",0,1e-08,TRUE
+"dense bic 4 birth mass",0,1e-08,TRUE
+"dense bic 5 birth mass",5.55111512312578e-17,1e-08,TRUE
+"dense bic 6 birth mass",0,1e-08,TRUE
+"dense bic 7 birth mass",0,1e-08,TRUE
+"dense bic 8 birth mass",0,1e-08,TRUE
+"dense bic 9 birth mass",5.55111512312578e-17,1e-08,TRUE
+"dense bic 10 birth mass",0,1e-08,TRUE
+"dense bic 11 birth mass",0,1e-08,TRUE
+"dense bic 12 birth mass",0,1e-08,TRUE
+"dense bic 13 birth mass",0,1e-08,TRUE
+"dense bic 14 birth mass",0,1e-08,TRUE
+"dense bic 15 birth mass",0,1e-08,TRUE
+"dense bic 16 birth mass",0,1e-08,TRUE
+"dense bic 17 birth mass",0,1e-08,TRUE
+"dense bic 18 birth mass",0,1e-08,TRUE
+"dense bic 19 birth mass",0,1e-08,TRUE
+"dense bic 20 birth mass",0,1e-08,TRUE
+"dense bic 21 birth mass",0,1e-08,TRUE
+"dense bic 22 birth mass",0,1e-08,TRUE
+"dense bic 23 birth mass",0,1e-08,TRUE
+"dense bic 24 birth mass",0,1e-08,TRUE
+"dense bic 25 birth mass",0,1e-08,TRUE
+"dense bic 26 birth mass",0,1e-08,TRUE
+"dense bic 27 birth mass",0,1e-08,TRUE
+"dense bic 28 birth mass",0,1e-08,TRUE
+"dense bic 29 birth mass",0,1e-08,TRUE
+"dense bic 30 birth mass",0,1e-08,TRUE
+"dense bic 31 birth mass",0,1e-08,TRUE
+"dense marginal positive full support",0,0,TRUE
+"dense marginal normalization",1.11022302462516e-16,1e-08,TRUE
+"dense marginal detailed balance",3.46944695195361e-17,1e-08,TRUE
+"dense marginal stationarity",3.46944695195361e-17,1e-08,TRUE
+"dense marginal 2 birth mass",0,1e-08,TRUE
+"dense marginal 3 birth mass",0,1e-08,TRUE
+"dense marginal 4 birth mass",0,1e-08,TRUE
+"dense marginal 5 birth mass",5.55111512312578e-17,1e-08,TRUE
+"dense marginal 6 birth mass",0,1e-08,TRUE
+"dense marginal 7 birth mass",0,1e-08,TRUE
+"dense marginal 8 birth mass",0,1e-08,TRUE
+"dense marginal 9 birth mass",1.11022302462516e-16,1e-08,TRUE
+"dense marginal 10 birth mass",5.55111512312578e-17,1e-08,TRUE
+"dense marginal 11 birth mass",0,1e-08,TRUE
+"dense marginal 12 birth mass",0,1e-08,TRUE
+"dense marginal 13 birth mass",0,1e-08,TRUE
+"dense marginal 14 birth mass",5.55111512312578e-17,1e-08,TRUE
+"dense marginal 15 birth mass",0,1e-08,TRUE
+"dense marginal 16 birth mass",0,1e-08,TRUE
+"dense marginal 17 birth mass",5.55111512312578e-17,1e-08,TRUE
+"dense marginal 18 birth mass",0,1e-08,TRUE
+"dense marginal 19 birth mass",0,1e-08,TRUE
+"dense marginal 20 birth mass",0,1e-08,TRUE
+"dense marginal 21 birth mass",0,1e-08,TRUE
+"dense marginal 22 birth mass",0,1e-08,TRUE
+"dense marginal 23 birth mass",0,1e-08,TRUE
+"dense marginal 24 birth mass",0,1e-08,TRUE
+"dense marginal 25 birth mass",5.55111512312578e-17,1e-08,TRUE
+"dense marginal 26 birth mass",0,1e-08,TRUE
+"dense marginal 27 birth mass",0,1e-08,TRUE
+"dense marginal 28 birth mass",0,1e-08,TRUE
+"dense marginal 29 birth mass",0,1e-08,TRUE
+"dense marginal 30 birth mass",0,1e-08,TRUE
+"dense marginal 31 birth mass",0,1e-08,TRUE
+"dense uniform positive full support",0,0,TRUE
+"dense uniform normalization",0,1e-08,TRUE
+"dense uniform detailed balance",1.21430643318376e-17,1e-08,TRUE
+"dense uniform stationarity",1.73472347597681e-17,1e-08,TRUE
+"dense exact_locally_balanced positive full support",0,0,TRUE
+"dense exact_locally_balanced normalization",2.22044604925031e-16,1e-08,TRUE
+"dense exact_locally_balanced detailed balance",3.46944695195361e-17,1e-08,TRUE
+"dense exact_locally_balanced stationarity",1.11022302462516e-16,1e-08,TRUE
+"dense bic_locally_balanced positive full support",0,0,TRUE
+"dense bic_locally_balanced normalization",1.11022302462516e-16,1e-08,TRUE
+"dense bic_locally_balanced detailed balance",2.42861286636753e-17,1e-08,TRUE
+"dense bic_locally_balanced stationarity",1.11022302462516e-16,1e-08,TRUE
+"duplicate f production target",7.105427357601e-15,1e-08,TRUE
+"duplicate f production/benchmark",0,1e-08,TRUE
+"duplicate f positive full support",0,0,TRUE
+"duplicate f normalization",1.11022302462516e-16,1e-08,TRUE
+"duplicate f detailed balance",9.0205620750794e-17,1e-08,TRUE
+"duplicate f stationarity",1.66533453693773e-16,1e-08,TRUE
+"duplicate f 2 birth mass",0,1e-08,TRUE
+"duplicate f 3 birth mass",0,1e-08,TRUE
+"duplicate f 4 birth mass",1.11022302462516e-16,1e-08,TRUE
+"duplicate f 5 birth mass",5.55111512312578e-17,1e-08,TRUE
+"duplicate f 6 birth mass",0,1e-08,TRUE
+"duplicate f 7 birth mass",0,1e-08,TRUE
+"duplicate f 8 birth mass",0,1e-08,TRUE
+"duplicate f 9 birth mass",1.11022302462516e-16,1e-08,TRUE
+"duplicate f 10 birth mass",0,1e-08,TRUE
+"duplicate f 11 birth mass",0,1e-08,TRUE
+"duplicate f 12 birth mass",0,1e-08,TRUE
+"duplicate f 13 birth mass",1.11022302462516e-16,1e-08,TRUE
+"duplicate f 14 birth mass",0,1e-08,TRUE
+"duplicate f 15 birth mass",0,1e-08,TRUE
+"duplicate f 16 birth mass",0,1e-08,TRUE
+"duplicate f 17 birth mass",0,1e-08,TRUE
+"duplicate f 18 birth mass",0,1e-08,TRUE
+"duplicate f 19 birth mass",0,1e-08,TRUE
+"duplicate f 20 birth mass",0,1e-08,TRUE
+"duplicate f 21 birth mass",0,1e-08,TRUE
+"duplicate f 22 birth mass",0,1e-08,TRUE
+"duplicate f 23 birth mass",0,1e-08,TRUE
+"duplicate f 24 birth mass",0,1e-08,TRUE
+"duplicate f 25 birth mass",5.55111512312578e-17,1e-08,TRUE
+"duplicate f 26 birth mass",0,1e-08,TRUE
+"duplicate f 27 birth mass",0,1e-08,TRUE
+"duplicate f 28 birth mass",0,1e-08,TRUE
+"duplicate f 29 birth mass",0,1e-08,TRUE
+"duplicate f 30 birth mass",0,1e-08,TRUE
+"duplicate f 31 birth mass",0,1e-08,TRUE
+"duplicate bic production target",7.105427357601e-15,1e-08,TRUE
+"duplicate bic production/benchmark",0,1e-08,TRUE
+"duplicate bic positive full support",0,0,TRUE
+"duplicate bic normalization",0,1e-08,TRUE
+"duplicate bic detailed balance",9.71445146547012e-17,1e-08,TRUE
+"duplicate bic stationarity",1.66533453693773e-16,1e-08,TRUE
+"duplicate bic 2 birth mass",0,1e-08,TRUE
+"duplicate bic 3 birth mass",0,1e-08,TRUE
+"duplicate bic 4 birth mass",0,1e-08,TRUE
+"duplicate bic 5 birth mass",0,1e-08,TRUE
+"duplicate bic 6 birth mass",0,1e-08,TRUE
+"duplicate bic 7 birth mass",0,1e-08,TRUE
+"duplicate bic 8 birth mass",0,1e-08,TRUE
+"duplicate bic 9 birth mass",0,1e-08,TRUE
+"duplicate bic 10 birth mass",0,1e-08,TRUE
+"duplicate bic 11 birth mass",0,1e-08,TRUE
+"duplicate bic 12 birth mass",0,1e-08,TRUE
+"duplicate bic 13 birth mass",0,1e-08,TRUE
+"duplicate bic 14 birth mass",0,1e-08,TRUE
+"duplicate bic 15 birth mass",0,1e-08,TRUE
+"duplicate bic 16 birth mass",0,1e-08,TRUE
+"duplicate bic 17 birth mass",0,1e-08,TRUE
+"duplicate bic 18 birth mass",0,1e-08,TRUE
+"duplicate bic 19 birth mass",0,1e-08,TRUE
+"duplicate bic 20 birth mass",0,1e-08,TRUE
+"duplicate bic 21 birth mass",0,1e-08,TRUE
+"duplicate bic 22 birth mass",0,1e-08,TRUE
+"duplicate bic 23 birth mass",0,1e-08,TRUE
+"duplicate bic 24 birth mass",0,1e-08,TRUE
+"duplicate bic 25 birth mass",0,1e-08,TRUE
+"duplicate bic 26 birth mass",0,1e-08,TRUE
+"duplicate bic 27 birth mass",0,1e-08,TRUE
+"duplicate bic 28 birth mass",0,1e-08,TRUE
+"duplicate bic 29 birth mass",0,1e-08,TRUE
+"duplicate bic 30 birth mass",0,1e-08,TRUE
+"duplicate bic 31 birth mass",0,1e-08,TRUE
+"duplicate marginal positive full support",0,0,TRUE
+"duplicate marginal normalization",1.11022302462516e-16,1e-08,TRUE
+"duplicate marginal detailed balance",9.0205620750794e-17,1e-08,TRUE
+"duplicate marginal stationarity",1.66533453693773e-16,1e-08,TRUE
+"duplicate marginal 2 birth mass",1.11022302462516e-16,1e-08,TRUE
+"duplicate marginal 3 birth mass",1.11022302462516e-16,1e-08,TRUE
+"duplicate marginal 4 birth mass",5.55111512312578e-17,1e-08,TRUE
+"duplicate marginal 5 birth mass",0,1e-08,TRUE
+"duplicate marginal 6 birth mass",0,1e-08,TRUE
+"duplicate marginal 7 birth mass",0,1e-08,TRUE
+"duplicate marginal 8 birth mass",0,1e-08,TRUE
+"duplicate marginal 9 birth mass",0,1e-08,TRUE
+"duplicate marginal 10 birth mass",0,1e-08,TRUE
+"duplicate marginal 11 birth mass",0,1e-08,TRUE
+"duplicate marginal 12 birth mass",0,1e-08,TRUE
+"duplicate marginal 13 birth mass",5.55111512312578e-17,1e-08,TRUE
+"duplicate marginal 14 birth mass",0,1e-08,TRUE
+"duplicate marginal 15 birth mass",0,1e-08,TRUE
+"duplicate marginal 16 birth mass",0,1e-08,TRUE
+"duplicate marginal 17 birth mass",0,1e-08,TRUE
+"duplicate marginal 18 birth mass",5.55111512312578e-17,1e-08,TRUE
+"duplicate marginal 19 birth mass",5.55111512312578e-17,1e-08,TRUE
+"duplicate marginal 20 birth mass",0,1e-08,TRUE
+"duplicate marginal 21 birth mass",0,1e-08,TRUE
+"duplicate marginal 22 birth mass",0,1e-08,TRUE
+"duplicate marginal 23 birth mass",0,1e-08,TRUE
+"duplicate marginal 24 birth mass",0,1e-08,TRUE
+"duplicate marginal 25 birth mass",0,1e-08,TRUE
+"duplicate marginal 26 birth mass",0,1e-08,TRUE
+"duplicate marginal 27 birth mass",0,1e-08,TRUE
+"duplicate marginal 28 birth mass",0,1e-08,TRUE
+"duplicate marginal 29 birth mass",0,1e-08,TRUE
+"duplicate marginal 30 birth mass",0,1e-08,TRUE
+"duplicate marginal 31 birth mass",0,1e-08,TRUE
+"duplicate uniform positive full support",0,0,TRUE
+"duplicate uniform normalization",0,1e-08,TRUE
+"duplicate uniform detailed balance",3.72965547335014e-17,1e-08,TRUE
+"duplicate uniform stationarity",9.71445146547012e-17,1e-08,TRUE
+"duplicate exact_locally_balanced positive full support",0,0,TRUE
+"duplicate exact_locally_balanced normalization",1.11022302462516e-16,1e-08,TRUE
+"duplicate exact_locally_balanced detailed balance",8.67361737988404e-17,1e-08,TRUE
+"duplicate exact_locally_balanced stationarity",1.59594559789866e-16,1e-08,TRUE
+"duplicate bic_locally_balanced positive full support",0,0,TRUE
+"duplicate bic_locally_balanced normalization",2.22044604925031e-16,1e-08,TRUE
+"duplicate bic_locally_balanced detailed balance",9.54097911787244e-17,1e-08,TRUE
+"duplicate bic_locally_balanced stationarity",1.70002900645727e-16,1e-08,TRUE
+"f fixed/frozen adaptive path",0,0,TRUE
+"f adaptation actually updates",0,0,TRUE
+"f fixed recorded collapsed log target",1.4210854715202e-14,1e-08,TRUE
+"f fixed final proposal cache",0,1e-08,TRUE
+"f online recorded collapsed log target",1.4210854715202e-14,1e-08,TRUE
+"f online final proposal cache",0,1e-08,TRUE
+"f initial phi independence",0,0,TRUE
+"bic fixed/frozen adaptive path",0,0,TRUE
+"bic adaptation actually updates",0,0,TRUE
+"bic fixed recorded collapsed log target",2.8421709430404e-14,1e-08,TRUE
+"bic fixed final proposal cache",0,1e-08,TRUE
+"bic online recorded collapsed log target",1.4210854715202e-14,1e-08,TRUE
+"bic online final proposal cache",0,1e-08,TRUE
+"bic initial phi independence",0,0,TRUE

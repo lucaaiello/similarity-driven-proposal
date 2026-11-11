@@ -1,0 +1,109 @@
+FRESH-START 50,000-ITERATION ADAPTIVE TEMPERING: ALL THREE SAMPLERS
+12 independent ladders: three samplers x four fresh null/5%/10%/15% starts.
+Ten replicas and ten one-thread workers per ladder. All replicas in each ladder share its fresh start.
+Burn25,000; no thinning; 25,000 cold draws per ladder. Hot draws do not enter posterior summaries.
+Every adjacent pair attempted once per iteration in random order, recalculating MH probabilities sequentially.
+Likelihood-only powers, unchanged priors/local kernels; MMV log-gap target0.234 and separate diversity adaptation online.
+All alpha/beta zero, g1 and alpha covariance identity initially; no old endpoint/tuning imported.
+Global alpha covariance is fixed apart from the existing temperature scaling; joint alpha/beta moves are enabled.
+Rhat/PIP disagreement must be assessed; longer chains or exchange acceptance alone do not establish convergence.
+Threshold crossings and walker roundtrips are diagnostic events, not independent posterior samples.
+Cross-method timing is descriptive: tasks may run on different hardware/load and uniform replicas can have different costs.
+
+                  method          start retained seconds_including_startup
+  online_similarity_flip           null    25000                 183177.95
+ online_similarity_local           null    25000                 191427.65
+            uniform_flip           null    25000                  13148.63
+  online_similarity_flip  moderate_5pct    25000                 177048.78
+ online_similarity_local  moderate_5pct    25000                 192034.69
+            uniform_flip  moderate_5pct    25000                  12675.35
+  online_similarity_flip moderate_10pct    25000                 186329.21
+ online_similarity_local moderate_10pct    25000                 208406.33
+            uniform_flip moderate_10pct    25000                  12082.66
+  online_similarity_flip    dense_15pct    25000                 171990.34
+ online_similarity_local    dense_15pct    25000                 183472.72
+            uniform_flip    dense_15pct    25000                  11554.09
+ allocated_core_hours worker_cpu_hours_excluding_startup
+            508.82765                          465.71942
+            531.74348                          499.07212
+             36.52396                           18.75661
+            491.80217                          458.70663
+            533.42968                          497.23781
+             35.20930                           18.78206
+            517.58114                          460.14589
+            578.90648                          497.44179
+             33.56294                           19.11181
+            477.75095                          442.94772
+            509.64645                          454.59231
+             32.09470                           18.56435
+ cold_alpha_acceptance_full cold_flip_acceptance_full cold_local_accepted_full
+                      0e+00                0.36850867                        0
+                      0e+00                0.36701733                   536623
+                      0e+00                0.02317000                        0
+                      0e+00                0.37223933                        0
+                      0e+00                0.36680000                   537819
+                      0e+00                0.02335733                        0
+                      0e+00                0.36859467                        0
+                      0e+00                0.37088800                   539033
+                      0e+00                0.02356200                        0
+                      4e-05                0.37076267                        0
+                      0e+00                0.36772867                   535813
+                      2e-05                0.02328733                        0
+ cold_joint_accepted_full roundtrips_full cold_swaps_post
+                   585880               2            5855
+                   580956               0            5792
+                   582447               2            6100
+                   585396               1            5610
+                   583845               2            5565
+                   583776               1            5802
+                   585574               1            5911
+                   585412               1            5968
+                   579343               0            5612
+                   585092               1            5580
+                   581782               0            5858
+                   579475               1            5886
+ cold_swap_crossings4014_post cold_local_crossings4014_post
+                            0                             0
+                         5746                             0
+                         1689                             5
+                         5401                             4
+                         1187                            43
+                         3439                            23
+                            0                             0
+                            0                             0
+                         2895                            19
+                            0                             0
+                         2045                            17
+                          451                             1
+
+                  method              variable     rhat range_of_chain_means
+  online_similarity_flip            model_size 1.105142          7.479520000
+  online_similarity_flip             prev_size 1.700806          7.483640000
+  online_similarity_flip            prev_alpha 1.233643          0.763996066
+  online_similarity_flip         log_posterior 1.083667         21.873567324
+  online_similarity_flip           subject3026 1.232664          0.279110713
+  online_similarity_flip           subject4014 1.305288          0.200283224
+  online_similarity_flip positive_subject_mean 1.230980          0.014840941
+ online_similarity_local            model_size 1.059571          5.880840000
+ online_similarity_local             prev_size 1.317374          4.255440000
+ online_similarity_local            prev_alpha 1.159128          0.706145694
+ online_similarity_local         log_posterior 1.012225          7.052213790
+ online_similarity_local           subject3026 1.078965          0.095456570
+ online_similarity_local           subject4014 1.492081          0.360276582
+ online_similarity_local positive_subject_mean 1.227917          0.014111252
+            uniform_flip            model_size 1.025048          3.489960000
+            uniform_flip             prev_size 1.033557          1.184920000
+            uniform_flip            prev_alpha 1.090482          0.489236021
+            uniform_flip         log_posterior 1.027797         13.134694196
+            uniform_flip           subject3026 1.018048          0.034504071
+            uniform_flip           subject4014 1.035734          0.073367416
+            uniform_flip positive_subject_mean 1.024207          0.003265981
+
+                  method max_pip_spread prev_pip_spreads_ge_half
+  online_similarity_flip        0.99732                       26
+ online_similarity_local        0.99876                       41
+            uniform_flip        0.98116                       34
+ max_positive_subject_spread_pp
+                      27.911071
+                      36.027658
+                       7.336742

@@ -1,0 +1,17 @@
+mode: full
+stage: core
+datasets: 20
+chains: 3
+runs: 5000
+burn: 2500
+thin: 5
+n: 70
+J: 5
+P: 18
+predictor_correlation: AR(1), rho=0.65
+production adaptation: category-wise online diminishing diversity adaptation
+adaptation gain: 0.5*(100+m)^(-0.6)
+effective-neighbor target: min(P,max(5,0.025*P))
+optimized proposal: balanced birth/death directions plus 2% direction-preserving uniform mixture
+continuous coefficient proposal: PMLE/Hessian construction fixed across discrete-proposal ablations
+local graph: four strongest empirical absolute correlations per predictor

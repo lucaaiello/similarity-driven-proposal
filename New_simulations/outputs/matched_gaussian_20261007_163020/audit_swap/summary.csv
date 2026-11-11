@@ -1,0 +1,2 @@
+"states","tolerance","f_max_abs","bic_max_abs","lr_max_abs","uniform_max_abs","passed"
+200,1e-09,8.32667268468867e-16,1.765254609154e-14,1.14908083048704e-14,0,TRUE

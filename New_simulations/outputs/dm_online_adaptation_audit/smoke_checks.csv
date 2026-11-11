@@ -1,0 +1,10 @@
+"check","passed"
+"finite_posterior",TRUE
+"finite_alpha",TRUE
+"finite_beta",TRUE
+"finite_g",TRUE
+"bounded_g",TRUE
+"finite_effective_neighbors",TRUE
+"valid_effective_neighbors",TRUE
+"adaptation_updated",TRUE
+"retained_dimensions",TRUE

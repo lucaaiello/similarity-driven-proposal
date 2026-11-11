@@ -1,0 +1,5 @@
+baseline: New_simulations/outputs/dm_online_adaptive_primary_20datasets
+gagnon: New_simulations/outputs/dm_gagnon_laplace_20datasets
+Gagnon comparator: conditional posterior Laplace model probabilities,
+Barker locally balanced one-flip weights, posterior-mode/Hessian Gaussian
+coefficient proposal, and exact joint MH/RJ correction.

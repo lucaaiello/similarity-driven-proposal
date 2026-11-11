@@ -1,0 +1,4 @@
+"method","genera","median_genus_max_pip_spread","predictors_spread_ge_quarter","predictors_spread_ge_half","max_pip_spread"
+"online_similarity_flip",29,0.03928,6,0,0.449
+"online_similarity_local",29,0.021,3,0,0.3886
+"uniform_flip",29,0.0977600000000001,9,0,0.34332

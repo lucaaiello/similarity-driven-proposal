@@ -1,0 +1,13 @@
+mode: full
+design: grid
+method_set: all
+production_proposal_engine: rank_one
+datasets_per_scenario: 20
+scenarios: n50_p8,n100_p8,n200_p8,n50_p10,n100_p10,n200_p10,n50_p12,n100_p12,n200_p12
+runs: 20000
+burn: 5000
+chains: 3
+target: exact production conjugate posterior with phi integrated to Beta-binomial configuration prior
+methods: f_fixed,bic_fixed,f_online,bic_online,uniform,locally_balanced,bic_locally_balanced
+timing: all proposal-score construction is included; accepted reverse proposals are cached as the next forward proposal
+paired_timing_baseline: locally_balanced on the same dataset and chain start

@@ -1,0 +1,32 @@
+# Complete local recovery snapshot: never publish it.
+/backup_complete_20261110/
+
+# Regenerated compiler/session/build artifacts.
+**/.rcpp_cache/
+**/sourceCpp-*/
+**/__pycache__/
+*.dll
+*.so
+*.o
+*.obj
+*.pyc
+.Rhistory
+.RData
+*.fdb_latexmk
+*.fls
+*.log
+*.blg
+*.synctex.gz
+*.out
+
+# Preserve current PDFs, bbl/aux external labels and scientific outputs.
+
+# Locally regenerated assets and distributable archives.
+/reproduced/
+/reproduced_*/
+/dist/
+
+# Submission correspondence and local housekeeping are not public materials.
+/CLEANUP_REPORT.md
+/JCGS_submission/response_letter.*
+/JCGS_submission/cover_letter.*

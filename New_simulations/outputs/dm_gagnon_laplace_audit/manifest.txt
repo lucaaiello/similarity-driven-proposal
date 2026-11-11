@@ -1,0 +1,4 @@
+Audit: Gagnon-adapted conditional Laplace/Barker model proposal
+Checks: finite positive probabilities, normalization, deterministic repetition,
+and agreement of 25-iteration production optimization with a 100-iteration reference.
+This is a numerical proposal audit; posterior recovery is assessed by the replicated experiment.

@@ -1,0 +1,5 @@
+"state","finite","minimum_probability","maximum_sum_error","repeat_max_abs","reference_max_abs"
+"null",TRUE,0.00335244891440228,2.22044604925031e-16,0,0
+"sparse",TRUE,0.00206452595390506,1.11022302462516e-16,0,0
+"moderate",TRUE,0.00335382865149702,0,0,0
+"dense",TRUE,1.90099595369164e-07,2.22044604925031e-16,0,0

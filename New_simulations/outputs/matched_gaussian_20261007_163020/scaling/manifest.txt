@@ -1,0 +1,15 @@
+mode: full
+n: 200
+dimensions: 50,100,250,500,1000
+datasets_per_dimension: 20
+chains: 3
+wall_clock_budget_seconds_per_chain_method: 5
+burn_iterations: 100
+signals: 10
+rho: 0.5
+signal_size: 0.8
+methods: uniform,f_fixed,bic_fixed,f_online,bic_online,locally_balanced,bic_locally_balanced
+target: conjugate Gaussian variable-selection posterior; no exact enumeration
+F/BIC engine: rank-one benchmark wrapper, statewise audited against the production rank-one engine
+timing: includes target and proposal construction; accepted reverse proposal is cached
+stopping: budget checked after each transition and at least burn+50 optimized or burn+10 comparator iterations

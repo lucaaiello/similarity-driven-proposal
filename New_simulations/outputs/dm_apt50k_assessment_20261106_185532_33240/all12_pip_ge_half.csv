@@ -1,0 +1,8 @@
+"genus","category","predictor","predictor_code","min_method1","pooled_method1","min_method2","pooled_method2","min_method3","pooled_method3","min_all12_pip","nutrient","max_all12_pip"
+"Bacteroides",1,71,"malt",0.81024,0.93408,0.55704,0.63957,0.65928,0.73669,0.55704,"Maltose",0.98608
+"Bacteroides",1,94,"tau",0.78952,0.9434,0.97888,0.98668,0.99336,0.99649,0.78952,"Taurine",0.99976
+"Bacteroides",1,109,"ucat",0.55224,0.70255,0.72924,0.8042,0.77816,0.87042,0.55224,"Catechin, flavan-3-ol",0.96068
+"Barnesiella",2,1,"calor",0.83832,0.87768,0.87316,0.88508,0.853,0.90371,0.83832,"Calories",0.94056
+"Prevotella",6,45,"f204",0.67988,0.84124,0.86244,0.93402,0.99884,0.99919,0.67988,"Arachadonic fatty acid",0.9998
+"Phascolarctobacterium",24,35,"iodine",0.93804,0.94205,0.92548,0.93311,0.87664,0.90727,0.87664,"Iodine",0.94984
+"Parasutterella",29,25,"alco",0.7416,0.80683,0.80164,0.82119,0.81724,0.85842,0.7416,"Alcohol",0.915

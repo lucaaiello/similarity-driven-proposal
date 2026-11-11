@@ -2,6 +2,8 @@
 
 // #include <Rcpp.h>
 #include <RcppArmadillo.h>
+#include "../New_simulations/gaussian_revision_shared.h"
+#include <limits>
 using namespace Rcpp;
 
 #include <omp.h>
@@ -60,6 +62,19 @@ double marg_loglik_eff(double n, const arma::mat& XT_X, const arma::vec& XT_y,
   return f;
 }
 
+// [[Rcpp::export]]
+double audit_f_log_target_cpp(const arma::vec& y, const arma::mat& X,
+                                     const arma::vec& gamma, double a=2.0,
+                                     double d=2.0, double tau=1.0,
+                                     double a_phi=1.0, double b_phi=3.0) {
+  arma::uvec cols = arma::join_cols(arma::uvec({0}), arma::find(gamma > 0) + 1);
+  arma::mat Xm = X.cols(cols);
+  int q = cols.n_elem;
+  return marg_loglik_eff(y.n_elem, Xm.t()*Xm, Xm.t()*y, arma::dot(y,y),
+    a,d,arma::eye(q,q)/tau,std::pow(tau,-q)) +
+    gaussrev::prior(arma::accu(gamma),gamma.n_elem,a_phi,b_phi);
+}
+
 arma::vec dbinom_cpp(const arma::vec& x, int size, double prob, bool log_density = true) {
   int n = x.n_elem;
   arma::vec densities(n); // Vector to store densities for each element of x
@@ -109,11 +124,101 @@ double f_test_pvalue(double F_stat, int df1, int df2) {
   return R::pf(F_stat, df1, df2, false, false); // upper tail p-value
 }
 
+arma::vec normalize_proposal(const arma::vec& log_weight, const arma::vec& gamma,
+                             bool balanced_directions, double uniform_mixture) {
+  const int p = gamma.n_elem;
+  arma::vec prop(p, arma::fill::zeros);
+  if (!balanced_directions) {
+    prop = arma::exp(log_weight - log_weight.max());
+    prop /= arma::sum(prop);
+    if (uniform_mixture > 0.0)
+      prop = (1.0 - uniform_mixture) * prop + uniform_mixture / p;
+    return prop;
+  }
+  arma::uvec births = arma::find(gamma == 0);
+  arma::uvec deaths = arma::find(gamma > 0);
+  bool has_births = births.n_elem > 0, has_deaths = deaths.n_elem > 0;
+  double birth_mass = has_births && has_deaths ? 0.5 : (has_births ? 1.0 : 0.0);
+  double death_mass = has_births && has_deaths ? 0.5 : (has_deaths ? 1.0 : 0.0);
+  if (has_births) {
+    arma::vec z = arma::exp(log_weight.elem(births) - log_weight.elem(births).max());
+    prop.elem(births) = birth_mass * z / arma::sum(z);
+  }
+  if (has_deaths) {
+    arma::vec z = arma::exp(log_weight.elem(deaths) - log_weight.elem(deaths).max());
+    prop.elem(deaths) = death_mass * z / arma::sum(z);
+  }
+  if (uniform_mixture > 0.0) {
+    prop *= (1.0 - uniform_mixture);
+    if (has_births) prop.elem(births) += birth_mass * uniform_mixture / births.n_elem;
+    if (has_deaths) prop.elem(deaths) += death_mass * uniform_mixture / deaths.n_elem;
+  }
+  return prop;
+}
+
+// All one-flip F scores from one factorization of the current model.  This is
+// algebraically equivalent to the legacy candidate-by-candidate regressions.
+arma::vec proposal_inf_rank_one(const arma::vec& gamma,
+                                const arma::vec& XT_y,
+                                const arma::mat& XT_X,
+                                double y_sum_sq, double RSS_null, int n,
+                                double lambda, bool balanced_directions,
+                                double uniform_mixture) {
+  const int p = gamma.n_elem;
+  const int current_k = arma::accu(gamma);
+  arma::uvec selected = arma::join_cols(arma::uvec({0}), arma::find(gamma > 0) + 1);
+  arma::mat gram_current = XT_X.submat(selected, selected);
+  arma::mat gram_inverse;
+  if (selected.n_elem >= (arma::uword)n || !arma::inv_sympd(gram_inverse, gram_current)) {
+    arma::vec log_weight(p);
+    for (int j = 0; j < p; ++j) {
+      arma::vec candidate = gamma; candidate(j) = 1 - candidate(j);
+      arma::uvec cols = arma::join_cols(arma::uvec({0}), arma::find(candidate > 0) + 1);
+      double residual = gaussrev::rss(XT_X.submat(cols, cols), XT_y(cols), y_sum_sq);
+      double score = gaussrev::f_score(arma::accu(candidate), n, RSS_null, residual);
+      log_weight(j) = std::pow(score, lambda);
+    }
+    return normalize_proposal(log_weight, gamma, balanced_directions, uniform_mixture);
+  }
+  arma::vec beta = gram_inverse * XT_y(selected);
+  double rss_current = std::max(y_sum_sq - arma::dot(XT_y(selected), beta), 1e-14);
+  arma::ivec active_position(p, arma::fill::value(-1));
+  for (arma::uword pos = 1; pos < selected.n_elem; ++pos)
+    active_position(selected(pos) - 1) = static_cast<int>(pos);
+
+  arma::vec log_weight(p, arma::fill::zeros);
+  for (int j = 0; j < p; ++j) {
+    int candidate_k = current_k + (gamma(j) > 0 ? -1 : 1);
+    double rss_candidate;
+    if (gamma(j) > 0) {
+      int pos = active_position(j);
+      rss_candidate = rss_current + beta(pos) * beta(pos) / gram_inverse(pos, pos);
+    } else {
+      arma::uword column = static_cast<arma::uword>(j + 1);
+      arma::vec cross = XT_X.submat(selected, arma::uvec({column}));
+      double denominator = XT_X(column, column) - arma::as_scalar(cross.t() * gram_inverse * cross);
+      double numerator = XT_y(column) - arma::dot(cross, beta);
+      rss_candidate = denominator > 1e-12
+        ? rss_current - numerator * numerator / denominator : rss_current;
+    }
+    rss_candidate = std::max(rss_candidate, 1e-14);
+    double score = gaussrev::f_score(candidate_k, n, RSS_null, rss_candidate);
+    log_weight(j) = std::pow(score, lambda);
+  }
+  return normalize_proposal(log_weight, gamma, balanced_directions, uniform_mixture);
+}
+
 // Function to calculate proposal probabilities based on F-test p-values
 // Proposal is proportional to exp((-log(pval))^lambda)
 arma::vec proposal_inf(const arma::vec& gamma, const arma::vec& y, const arma::mat& X,
                        const arma::vec& XT_y, const arma::mat& XT_X,
-                       double RSS_null, double lambda) {
+                       double RSS_null, double lambda,
+                       bool balanced_directions = false, double uniform_mixture = 0.0,
+                       const std::string& proposal_engine = "legacy") {
+  if (proposal_engine == "rank_one")
+    return proposal_inf_rank_one(gamma, XT_y, XT_X, arma::dot(y,y), RSS_null,
+                                 y.n_elem, lambda, balanced_directions, uniform_mixture);
+  if (proposal_engine != "legacy") stop("proposal_engine must be legacy or rank_one");
   
   double y_sum_sq = arma::dot(y, y);              // This is y'y
   const int p = gamma.n_elem;
@@ -145,28 +250,9 @@ arma::vec proposal_inf(const arma::vec& gamma, const arma::vec& y, const arma::m
     arma::mat XnewT_Xnew = XT_X.submat(selected, selected);
     arma::vec XnewT_y = XT_y(selected);
     
-    // Solve normal equations
-    arma::vec betahat = arma::solve(XnewT_Xnew, XnewT_y);
-    
-    // Compute RSS for proposed model
-    double RSS_prop = y_sum_sq - arma::dot(XnewT_y, betahat);  // This is y'y - β'(X'y)
-    // RSS_prop = std::max(RSS_prop, 1e-10); // ensure positive
-    
-    // Compute F-statistic
-    double F_prop = F_stat(RSS_null, RSS_prop, n, 1, p_prop);
-    // F_prop = std::max(F_prop, 1e-10); // ensure positive
-    
-    // Compute degrees of freedom for F-test
-    int df1 = 1; // testing one variable
-    // int df1 = p_prop - 1;  // Should match (p2 - p1) used in F calculation
-    int df2 = n - p_prop; // residual degrees of freedom
-    df2 = std::max(df2, 1); // ensure positive
-    
-    // Get p-value from F-test
-    pval(i) = f_test_pvalue(F_prop, df1, df2);
-    // Cap extreme p-values for stability
-    // pval(i) = std::min(std::max(pval(i), 1e-15), 1.0 - 1e-15);
-    
+    double RSS_prop = gaussrev::rss(XnewT_Xnew, XnewT_y, y_sum_sq);
+    pval(i) = std::pow(10.0, -gaussrev::f_score(p_prop - 1, n, RSS_null, RSS_prop));
+
   }
   
   // Weight proportional to exp((-log(pval))^lambda)
@@ -176,11 +262,88 @@ arma::vec proposal_inf(const arma::vec& gamma, const arma::vec& y, const arma::m
   
   // Normalize using log-sum-exp trick
   // Weights are proportional to exp(log_weight)
-  double max_weight = log_weight.max();
-  arma::vec prop = arma::exp(log_weight - max_weight);
-  prop /= arma::sum(prop);
-  
-  return prop;
+  return normalize_proposal(log_weight, gamma, balanced_directions, uniform_mixture);
+}
+
+// Conditional probabilities for replacing one active predictor by one of a
+// supplied set of inactive predictors.  The rank-one path factors the model
+// with the outgoing predictor removed once, then evaluates every addition by
+// an OLS rank-one identity.
+arma::vec swap_probabilities_f(const arma::vec& gamma, int outgoing,
+                               const arma::uvec& candidates,
+                               const arma::vec& XT_y, const arma::mat& XT_X,
+                               double yT_y, double RSS_null, int n,
+                               double lambda, const std::string& engine,
+                               const std::string& weight_mode) {
+  if (candidates.n_elem == 0) return arma::vec();
+  if (weight_mode == "uniform")
+    return arma::vec(candidates.n_elem, arma::fill::value(1.0 / candidates.n_elem));
+  if (weight_mode != "informed") stop("move_weight_mode must be informed or uniform");
+  arma::vec log_weight(candidates.n_elem, arma::fill::zeros);
+  arma::vec base_gamma = gamma;
+  base_gamma(outgoing) = 0;
+  arma::uvec base = join_cols(arma::uvec({0}), arma::find(base_gamma > 0) + 1);
+  arma::mat base_inverse;
+  arma::vec base_beta;
+  double rss_base = 0.0;
+  bool rank_one_ok = false;
+  if (engine == "rank_one") {
+    arma::mat gram = XT_X.submat(base, base);
+    rank_one_ok = base.n_elem < (arma::uword)n && arma::inv_sympd(base_inverse, gram);
+    if (!rank_one_ok) base_inverse = arma::pinv(gram);
+    base_beta = base_inverse * XT_y(base);
+    rss_base = std::max(yT_y - arma::dot(XT_y(base), base_beta), 1e-14);
+  } else if (engine != "legacy") stop("proposal_engine must be legacy or rank_one");
+  const int candidate_k = arma::accu(gamma);
+  const int p_prop = candidate_k + 1;
+  const int df2 = std::max(n - p_prop, 1);
+  for (arma::uword j = 0; j < candidates.n_elem; ++j) {
+    double rss;
+    if (engine == "rank_one" && rank_one_ok) {
+      arma::uword column = candidates(j) + 1;
+      arma::vec cross = XT_X.submat(base, arma::uvec({column}));
+      double denominator = XT_X(column,column) - arma::as_scalar(cross.t()*base_inverse*cross);
+      double numerator = XT_y(column) - arma::dot(cross,base_beta);
+      rss = denominator > 1e-12 ? rss_base - numerator*numerator/denominator : rss_base;
+    } else {
+      arma::vec candidate_gamma = base_gamma;
+      candidate_gamma(candidates(j)) = 1;
+      arma::uvec selected = join_cols(arma::uvec({0}), arma::find(candidate_gamma > 0) + 1);
+      arma::mat gram = XT_X.submat(selected,selected);
+      arma::vec cross_y = XT_y(selected);
+      rss = gaussrev::rss(gram, cross_y, yT_y);
+    }
+    rss = std::max(rss,1e-14);
+    double score = gaussrev::f_score(candidate_k, n, RSS_null, rss);
+    log_weight(j) = std::pow(score,lambda);
+  }
+  arma::vec weights = arma::exp(log_weight-log_weight.max());
+  return weights/arma::sum(weights);
+}
+
+// [[Rcpp::export]]
+arma::vec audit_f_swap_proposal_cpp(const arma::vec& y, const arma::mat& X,
+                                    const arma::vec& gamma, int outgoing_one_based,
+                                    const arma::uvec& candidates_one_based,
+                                    double lambda=1.0,
+                                    std::string proposal_engine="legacy",
+                                    std::string move_weight_mode="informed") {
+  return swap_probabilities_f(gamma,outgoing_one_based-1,candidates_one_based-1,
+    X.t()*y,X.t()*X,arma::dot(y,y),arma::accu(arma::square(y-arma::mean(y))),
+    y.n_elem,lambda,proposal_engine,move_weight_mode);
+}
+
+// [[Rcpp::export]]
+arma::vec audit_f_proposal_cpp(const arma::vec& y, const arma::mat& X,
+                               const arma::vec& gamma, double lambda = 0.7,
+                               bool balanced_directions = false,
+                               double uniform_mixture = 0.0,
+                               std::string proposal_engine = "legacy") {
+  arma::mat XT_X = X.t() * X;
+  arma::vec XT_y = X.t() * y;
+  double RSS_null = arma::accu(arma::square(y - arma::mean(y)));
+  return proposal_inf(gamma, y, X, XT_y, XT_X, RSS_null, lambda,
+                      balanced_directions, uniform_mixture, proposal_engine);
 }
 
 // [[Rcpp::export]]
@@ -190,10 +353,35 @@ List var_sel_distance_cpp(arma::vec y, arma::mat X, std::vector<arma::vec> neigh
                           int runs, int burn, int thin = 1, int start_adapt = 100, int end_adapt = 1000, 
                           double lambda_bd = 1.0, double lambda_move = 1.0, 
                           double trgt_acpt = 0.234, bool adapt = false,
-                          bool move_step = false) {
+                          bool move_step = false,
+                          std::string adaptation_mode = "legacy",
+                          bool balanced_directions = false,
+                          double uniform_mixture = 0.0,
+                          double target_effective_fraction = 0.025,
+                          double adaptation_gain = 0.5,
+                          double adaptation_decay = 0.6,
+                          double adaptation_offset = 100.0,
+                          std::string proposal_engine = "legacy",
+                          std::string move_weight_mode = "informed") {
   
   int n = y.n_elem;
   int p = X.n_cols - 1;
+  if (adaptation_mode != "legacy" && adaptation_mode != "diversity")
+    stop("adaptation_mode must be legacy or diversity");
+  if (uniform_mixture < 0.0 || uniform_mixture >= 1.0)
+    stop("uniform_mixture must be in [0,1)");
+  if (adaptation_decay <= 0.5 || adaptation_decay > 1.0)
+    stop("adaptation_decay must be in (0.5,1]");
+  if (proposal_engine != "legacy" && proposal_engine != "rank_one")
+    stop("proposal_engine must be legacy or rank_one");
+  if (move_weight_mode != "informed" && move_weight_mode != "uniform")
+    stop("move_weight_mode must be informed or uniform");
+  bool diversity_adaptation = adaptation_mode == "diversity";
+  if (diversity_adaptation) {
+    balanced_directions = true;
+    if (uniform_mixture == 0.0) uniform_mixture = 0.02;
+  }
+  double target_effective_neighbors = std::max(5.0, target_effective_fraction * p);
   
   double RSS_null = arma::accu(arma::pow(arma::mean(y) - y, 2)); 
   
@@ -212,7 +400,7 @@ List var_sel_distance_cpp(arma::vec y, arma::mat X, std::vector<arma::vec> neigh
   
   // Initial log likelihood and prior
   double loglik = marg_loglik_eff(n, XinitT_Xinit, XinitT_y, yT_y, a, d, arma::eye(qinit + 1, qinit + 1) / tau, std::pow(tau, -(qinit + 1)));
-  double logprior = arma::sum(dbinom_cpp(gamma, 1, phi));
+  double logprior = gaussrev::prior(arma::accu(gamma), gamma.n_elem, a_phi, b_phi);
   
   int MCMC;
   if(thin == 0){
@@ -239,6 +427,7 @@ List var_sel_distance_cpp(arma::vec y, arma::mat X, std::vector<arma::vec> neigh
   // Tracking for current iteration
   int acc_bd_iter = 0;                 // Acceptances this iteration window
   int iter_counter = 0;                // Iterations since last update
+  double proposal_ess_window = 0.0;
   
   int window_size = 25;                // How often to update
   int adaptation_start = start_adapt;
@@ -257,11 +446,14 @@ List var_sel_distance_cpp(arma::vec y, arma::mat X, std::vector<arma::vec> neigh
   arma::vec loglikvec(MCMC, arma::fill::zeros);
   arma::vec accratevec(runs, arma::fill::zeros);
   arma::vec lambdavec(runs, arma::fill::zeros);
+  arma::vec proposal_ess_vec(runs, arma::fill::zeros);
   
   int acc_bd = 0;
   int acc_move = 0;
+  int move_attempts = 0;
   
-  arma::vec prop = proposal_inf(gamma, y, X, XT_y, XT_X, RSS_null, lambda_bd);
+  arma::vec prop = proposal_inf(gamma, y, X, XT_y, XT_X, RSS_null, lambda_bd,
+                                balanced_directions, uniform_mixture, proposal_engine);
   
   Rcout << "### Informed proposal: F statistics" << std::endl;
   Rcout << "### lambda_bd = " << lambda_bd << std::endl;
@@ -274,6 +466,7 @@ List var_sel_distance_cpp(arma::vec y, arma::mat X, std::vector<arma::vec> neigh
   int n_move_attempts = 1;
   
   for (int iter = 0; iter < runs; iter++) {
+    double proposal_ess = 1.0 / arma::accu(arma::square(prop));
     
     double progress = static_cast<double>(iter * 100) / runs;
     acc_rate_bd = static_cast<double>(acc_bd) / static_cast<double>(iter + 1);
@@ -299,7 +492,7 @@ List var_sel_distance_cpp(arma::vec y, arma::mat X, std::vector<arma::vec> neigh
     arma::uvec selected_new = join_cols(arma::uvec({0}), (arma::find(gammanew > 0) + 1));
     
     int qnew = arma::sum(gammanew);
-    double logprior_new = arma::sum(dbinom_cpp(gammanew, 1, phi));
+    double logprior_new = gaussrev::prior(arma::accu(gammanew), gammanew.n_elem, a_phi, b_phi);
     
     arma::mat Xnew = X.cols(selected_new);
     arma::mat XnewT_Xnew = XT_X.submat(selected_new, selected_new);
@@ -310,7 +503,8 @@ List var_sel_distance_cpp(arma::vec y, arma::mat X, std::vector<arma::vec> neigh
                                         std::pow(tau, -(qnew + 1)));
     double u = arma::randu();
     
-    arma::vec prop_new = proposal_inf(gammanew, y, X, XT_y, XT_X, RSS_null, lambda_bd);
+    arma::vec prop_new = proposal_inf(gammanew, y, X, XT_y, XT_X, RSS_null, lambda_bd,
+                                      balanced_directions, uniform_mixture, proposal_engine);
     
     double log_ratio = (loglik_new - loglik) + (logprior_new - logprior) + 
       (arma::trunc_log(prop_new(ind)) - arma::trunc_log(prop(ind)));
@@ -329,19 +523,29 @@ List var_sel_distance_cpp(arma::vec y, arma::mat X, std::vector<arma::vec> neigh
     }
     
     iter_counter += 1;
+    proposal_ess_window += proposal_ess;
     
     ////////////////////////
     // ROBBINS-MONRO ADAPTATION (matching reference formula)
     ////////////////////////
     
-    if (iter >= adaptation_start && iter < adaptation_end &&
+    if (iter >= adaptation_start && (diversity_adaptation || iter < adaptation_end) &&
         iter_counter >= window_size && adapt == true) {
       
       // Compute current window acceptance rate
       curr_accept_rate = static_cast<double>(acc_bd_iter) / window_size;
       
-      // Only update if we have a previous rate (after first window)
-      if (update_counter > 0) {
+      if (diversity_adaptation) {
+        double mean_effective = proposal_ess_window / iter_counter;
+        double step_size = adaptation_gain *
+          std::pow(adaptation_offset + update_counter, -adaptation_decay);
+        log_lambda_bd += step_size *
+          (std::log(mean_effective) - std::log(target_effective_neighbors));
+        log_lambda_bd = std::max(std::log(0.01), std::min(log_lambda_bd, std::log(2.0)));
+        lambda_bd = std::exp(log_lambda_bd);
+        prop = proposal_inf(gamma, y, X, XT_y, XT_X, RSS_null, lambda_bd,
+                            balanced_directions, uniform_mixture, proposal_engine);
+      } else if (update_counter > 0) {
         
         // Step size: decays as (j-1)^{-decay_power}
         double step_size = std::pow(static_cast<double>(update_counter), -decay_power);
@@ -366,6 +570,11 @@ List var_sel_distance_cpp(arma::vec y, arma::mat X, std::vector<arma::vec> neigh
         
         // Convert back to regular space
         lambda_bd = std::exp(log_lambda_bd);
+
+        // Refresh the cached proposal after changing lambda; otherwise the
+        // next transition uses weights from the previous adaptation value.
+        prop = proposal_inf(gamma, y, X, XT_y, XT_X, RSS_null, lambda_bd,
+                            balanced_directions, uniform_mixture, proposal_engine);
         
       } else {
         // First update - just store current state
@@ -377,11 +586,13 @@ List var_sel_distance_cpp(arma::vec y, arma::mat X, std::vector<arma::vec> neigh
       update_counter += 1;
       acc_bd_iter = 0;
       iter_counter = 0;
+      proposal_ess_window = 0.0;
       
     }
     
     accratevec(iter) = static_cast<double>(acc_bd) / static_cast<double>(iter + 1);
     lambdavec(iter) = lambda_bd;
+    proposal_ess_vec(iter) = proposal_ess;
     
     /////////////////
     // Move step //
@@ -417,37 +628,14 @@ List var_sel_distance_cpp(arma::vec y, arma::mat X, std::vector<arma::vec> neigh
             if (gamma(cand)==0) inactive_neigh.push_back(cand);
           }
           if (inactive_neigh.size()==0) continue;
+          move_attempts += 1;
           
           // Score inactive neighbors using lambda_move
           int m = inactive_neigh.size();
-          arma::vec f_lambda(m);
-          for (int j=0;j<m;++j) {
-            int cand0 = inactive_neigh[j];
-            arma::vec gamm_tmp = gamma;
-            gamm_tmp(move_idx)=0;
-            gamm_tmp(cand0)=1;
-            arma::uvec sel_tmp = join_cols(arma::uvec({0}), (arma::find(gamm_tmp > 0) + 1));
-            arma::mat XtX_tmp = XT_X.submat(sel_tmp, sel_tmp);
-            arma::vec Xty_tmp = XT_y(sel_tmp);
-            arma::vec beta_tmp = arma::solve(XtX_tmp, Xty_tmp);
-            double RSS_tmp = yT_y - arma::dot(Xty_tmp, beta_tmp);
-            RSS_tmp = std::max(RSS_tmp, 1e-6);
-            double Ftmp = F_stat(RSS_null, RSS_tmp, n, 1, (int)sel_tmp.n_elem);
-            Ftmp = std::max(Ftmp, 1e-12);
-            
-            int df1 = 1;
-            int df2 = n - (int)sel_tmp.n_elem;
-            df2 = std::max(df2, 1);
-            double pval = f_test_pvalue(Ftmp, df1, df2);
-            pval = std::max(pval, 1e-300);
-            
-            double score = std::pow(-std::log10(pval), lambda_move);
-            f_lambda(j) = score;
-          }
-          
-          double maxf = f_lambda.max();
-          arma::vec w = arma::exp(f_lambda - maxf);
-          w /= arma::sum(w);
+          arma::uvec inactive_u(m);
+          for (int j=0;j<m;++j) inactive_u(j)=inactive_neigh[j];
+          arma::vec w = swap_probabilities_f(gamma,move_idx,inactive_u,XT_y,XT_X,
+            yT_y,RSS_null,n,lambda_move,proposal_engine,move_weight_mode);
           
           double ru = arma::randu();
           double csum=0; int jpick=0;
@@ -461,7 +649,7 @@ List var_sel_distance_cpp(arma::vec y, arma::mat X, std::vector<arma::vec> neigh
           int qnew = arma::sum(gammanew);
           arma::mat XnewT_Xnew = XT_X.submat(selected_new, selected_new);
           arma::vec XnewT_y = XT_y(selected_new);
-          double logprior_new = arma::sum(dbinom_cpp(gammanew, 1, phi));
+          double logprior_new = gaussrev::prior(arma::accu(gammanew), gammanew.n_elem, a_phi, b_phi);
           double loglik_new = marg_loglik_eff(n, XnewT_Xnew, XnewT_y, yT_y, a, d,
                                               arma::eye(qnew+1,qnew+1)/tau,
                                               std::pow(tau,-(qnew+1)));
@@ -511,35 +699,10 @@ List var_sel_distance_cpp(arma::vec y, arma::mat X, std::vector<arma::vec> neigh
           if (!move_idx_in_reverse) continue;
           
           int mr = inactive_rev.size();
-          arma::vec fr_lambda(mr);
-          for (int j=0;j<mr;++j){
-            int cand0 = inactive_rev[j];
-            arma::vec gamm_tmp = gammanew;
-            gamm_tmp(rand_neigh_idx)=0;
-            gamm_tmp(cand0)=1;
-            arma::uvec sel_tmp = join_cols(arma::uvec({0}), (arma::find(gamm_tmp > 0) + 1));
-            arma::mat XtX_tmp = XT_X.submat(sel_tmp, sel_tmp);
-            arma::vec Xty_tmp = XT_y(sel_tmp);
-            arma::vec beta_tmp = arma::solve(XtX_tmp, Xty_tmp);
-            double RSS_tmp = yT_y - arma::dot(Xty_tmp, beta_tmp);
-            RSS_tmp = std::max(RSS_tmp, 1e-6);
-            
-            double Ftmp = F_stat(RSS_null, RSS_tmp, n, 1, (int)sel_tmp.n_elem);
-            Ftmp = std::max(Ftmp, 1e-12);
-            
-            int df1 = 1;
-            int df2 = n - (int)sel_tmp.n_elem;
-            df2 = std::max(df2, 1);
-            double pval = f_test_pvalue(Ftmp, df1, df2);
-            pval = std::max(pval, 1e-300);
-            
-            double score = std::pow(-std::log10(pval), lambda_move);
-            fr_lambda(j) = score;
-          }
-          
-          double maxfr = fr_lambda.max();
-          arma::vec wr = arma::exp(fr_lambda - maxfr);
-          wr /= arma::sum(wr);
+          arma::uvec inactive_rev_u(mr);
+          for (int j=0;j<mr;++j) inactive_rev_u(j)=inactive_rev[j];
+          arma::vec wr = swap_probabilities_f(gammanew,rand_neigh_idx,inactive_rev_u,
+            XT_y,XT_X,yT_y,RSS_null,n,lambda_move,proposal_engine,move_weight_mode);
           
           double pr = (1.0 / (double)act_rev_with_inactive.size()) * wr(jrev_index);
           
@@ -555,7 +718,8 @@ List var_sel_distance_cpp(arma::vec y, arma::mat X, std::vector<arma::vec> neigh
             selected = selected_new;
             loglik = loglik_new;
             logprior = logprior_new;
-            prop = proposal_inf(gamma, y, X, XT_y, XT_X, RSS_null, lambda_bd);
+            prop = proposal_inf(gamma, y, X, XT_y, XT_X, RSS_null, lambda_bd,
+                                balanced_directions, uniform_mixture, proposal_engine);
             acc_move += 1;
             // acc_move_window += 1;
             move_accepted_this_iter = true;
@@ -567,7 +731,7 @@ List var_sel_distance_cpp(arma::vec y, arma::mat X, std::vector<arma::vec> neigh
     }
     
     ////////////////
-    // Update phi //
+    // Auxiliary conditional phi draw; the MH target integrates phi out. //
     ////////////////
     double sum_gamma = arma::accu(gamma);
     phi = R::rbeta(a_phi + sum_gamma, b_phi + p - sum_gamma);
@@ -576,19 +740,35 @@ List var_sel_distance_cpp(arma::vec y, arma::mat X, std::vector<arma::vec> neigh
       GAMMAVEC.row(iter - burn) = gamma.t();
       phivec(iter - burn) = phi;
       indvec(iter-burn) = ind;
+      loglikvec(iter-burn) = loglik + logprior;
     }
     
   }
   
-  return Rcpp::List::create(
+  Rcpp::List output = Rcpp::List::create(
     Rcpp::Named("gamma") = GAMMAVEC,
     Rcpp::Named("prop") = indvec,
     Rcpp::Named("phi") = phivec,
     Rcpp::Named("loglik") = loglikvec,
     Rcpp::Named("acc_rate_bd") = acc_rate_bd,
     Rcpp::Named("acc_rate_move") = acc_rate_move,
+    Rcpp::Named("move_attempts") = move_attempts,
+    Rcpp::Named("move_acceptances") = acc_move,
+    Rcpp::Named("conditional_move_acceptance") = move_attempts > 0 ?
+      static_cast<double>(acc_move) / move_attempts : 0.0,
     Rcpp::Named("acc_rate_bd_chain") = accratevec,
-    Rcpp::Named("lambda_chain") = lambdavec
+    Rcpp::Named("lambda_chain") = lambdavec,
+    Rcpp::Named("proposal_effective_neighbors") = proposal_ess_vec,
+    Rcpp::Named("adaptation_mode") = adaptation_mode,
+    Rcpp::Named("proposal_engine") = proposal_engine,
+    Rcpp::Named("move_weight_mode") = move_weight_mode,
+    Rcpp::Named("target_effective_neighbors") = target_effective_neighbors
   );
+  output["final_proposal"] = prop;
+  output["final_gamma"] = gamma;
+  output["target_prior"] = "collapsed_beta_binomial";
+  output["balanced_directions"] = balanced_directions;
+  output["uniform_mixture"] = uniform_mixture;
+  return output;
   
 }

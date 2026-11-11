@@ -1,0 +1,8 @@
+"method","empirical_time_exponent"
+"uniform",0.108110303085248
+"f_fixed",0.833769188203491
+"bic_fixed",0.838536173095981
+"f_online",0.842412502836082
+"bic_online",0.844482912086291
+"locally_balanced",0.849959897591895
+"bic_locally_balanced",0.84234734192071

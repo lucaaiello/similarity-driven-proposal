@@ -1,0 +1,9 @@
+mode: full
+n: 200
+p: 200
+datasets: 10
+chains: 4
+budget_seconds: 5
+rho: 0.95
+kernels: optimized online-adaptive F, BIC, and marginal screening; flip-only
+adaptation: balanced directions, 2% mixture, diminishing diversity adaptation throughout sampling

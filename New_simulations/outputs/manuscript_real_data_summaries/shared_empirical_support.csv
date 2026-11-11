@@ -1,0 +1,8 @@
+"genus","category","predictor","code","min_all12","max_all12","nutrient"
+"Bacteroides",1,71,"malt",0.55704,0.98608,"Maltose"
+"Bacteroides",1,94,"tau",0.78952,0.99976,"Taurine"
+"Bacteroides",1,109,"ucat",0.55224,0.96068,"Catechin"
+"Barnesiella",2,1,"calor",0.83832,0.94056,"Calories"
+"Prevotella",6,45,"f204",0.67988,0.9998,"Arachidonic fatty acid"
+"Phascolarctobacterium",24,35,"iodine",0.87664,0.94984,"Iodine"
+"Parasutterella",29,25,"alco",0.7416,0.915,"Alcohol"

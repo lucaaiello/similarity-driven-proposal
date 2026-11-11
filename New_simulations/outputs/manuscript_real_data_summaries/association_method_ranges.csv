@@ -1,0 +1,22 @@
+"method","genus","nutrient","code","association","min_pip","mean_pip","max_pip"
+"online_similarity_flip","Bacteroides","Maltose","malt",1,0.81024,0.93408,0.98608
+"online_similarity_flip","Bacteroides","Taurine","tau",2,0.78952,0.9434,0.99896
+"online_similarity_flip","Bacteroides","Catechin","ucat",3,0.55224,0.70255,0.85668
+"online_similarity_flip","Barnesiella","Calories","calor",4,0.83832,0.87768,0.926
+"online_similarity_flip","Prevotella","Arachidonic fatty acid","f204",5,0.67988,0.84124,0.9998
+"online_similarity_flip","Phascolarctobacterium","Iodine","iodine",6,0.93804,0.94205,0.94984
+"online_similarity_flip","Parasutterella","Alcohol","alco",7,0.7416,0.80683,0.84776
+"online_similarity_local","Bacteroides","Maltose","malt",1,0.55704,0.63957,0.74676
+"online_similarity_local","Bacteroides","Taurine","tau",2,0.97888,0.98668,0.99476
+"online_similarity_local","Bacteroides","Catechin","ucat",3,0.72924,0.8042,0.87572
+"online_similarity_local","Barnesiella","Calories","calor",4,0.87316,0.88508,0.89668
+"online_similarity_local","Prevotella","Arachidonic fatty acid","f204",5,0.86244,0.93402,0.99924
+"online_similarity_local","Phascolarctobacterium","Iodine","iodine",6,0.92548,0.93311,0.93972
+"online_similarity_local","Parasutterella","Alcohol","alco",7,0.80164,0.82119,0.84028
+"uniform_flip","Bacteroides","Maltose","malt",1,0.65928,0.73669,0.92812
+"uniform_flip","Bacteroides","Taurine","tau",2,0.99336,0.99649,0.99976
+"uniform_flip","Bacteroides","Catechin","ucat",3,0.77816,0.87042,0.96068
+"uniform_flip","Barnesiella","Calories","calor",4,0.853,0.90371,0.94056
+"uniform_flip","Prevotella","Arachidonic fatty acid","f204",5,0.99884,0.99919,0.9996
+"uniform_flip","Phascolarctobacterium","Iodine","iodine",6,0.87664,0.90727,0.92608
+"uniform_flip","Parasutterella","Alcohol","alco",7,0.81724,0.85842,0.915

@@ -1,0 +1,15 @@
+#!/bin/bash
+#$ -cwd
+#$ -j y
+#$ -o New_simulations/dm_apt50k_fresh_v1/hoffman2/logs/summary.$JOB_ID.log
+#$ -N apt50_sum
+#$ -l highp,h_rt=4:00:00,h_data=12G
+set -euo pipefail
+. /u/local/Modules/default/init/modules.sh
+module load gcc/10.2.0
+module load R/4.2.2
+export R_LIBS_USER="$HOME/R/hoffman2-4.2.2-gcc10"
+export OMP_NUM_THREADS=1 OMP_THREAD_LIMIT=1 OMP_DYNAMIC=FALSE MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+sha256sum -c New_simulations/dm_apt50k_fresh_v1/inputs/bundle_files.sha256
+Rscript New_simulations/dm_apt50k_fresh_v1/summarize.R
+echo "FRESH50K SUMMARY COMPLETE job=$JOB_ID end=$(date --iso-8601=seconds)"

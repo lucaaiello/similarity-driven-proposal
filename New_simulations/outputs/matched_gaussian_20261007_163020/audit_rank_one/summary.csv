@@ -1,0 +1,2 @@
+"states","tolerance","f_max_abs","bic_max_abs","f_benchmark_max_abs","bic_benchmark_max_abs","exact_lb_max_abs","bic_lb_max_abs","passed"
+16200,1e-09,4.40203429263875e-14,1.88682403035045e-13,0,0,1.16018306073329e-14,1.13242748511766e-14,TRUE

@@ -1,0 +1,4 @@
+Independent integer-count likelihood/derivative references, finite differences,
+Gaussian sampling/density consistency, statewise flip/local probability references,
+and all-kernel finite-state smoke checks. Not a real-data convergence proof or a
+full trans-dimensional detailed-balance proof.

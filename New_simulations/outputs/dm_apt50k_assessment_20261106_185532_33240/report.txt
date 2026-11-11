@@ -1,0 +1,277 @@
+COMPLETED FRESH50K SLURM RUN: LOCAL READ-ONLY ASSESSMENT
+Input: New_simulations/outputs/dm_apt50k_fresh_slurm_v1/summary/summary.rds
+posterior package: 1.6.1
+12 records x25,000 retained cold draws; source hashes match local audited source graph.
+All21 reported full-window Rhat values reproduced using posterior::rhat to1e-10.
+No checkpoint was downloaded/read or independently revalidated in this assessment.
+No MCMC, fitting, compilation, scheduler submission or alteration of inputs was performed.
+A posterior mean/quantile here is an empirical chain summary, not proof of a settled posterior estimate.
+Threshold5% is the existing fitted-fraction diagnostic region, not an independently identified posterior mode.
+Window-specific PIPs/indicator ESS cannot be obtained from this summary: retained xi states are absent.
+Within-chain ESS/MCSE can look favorable inside a confined region; cross-chain evidence remains essential.
+Costs are descriptive; hardware/load and the states explored differ. No controlled timing or accuracy win claimed.
+
+MULTICHAIN DIAGNOSTICS: FULL RETAINED WINDOW
+                  method              variable window draws_per_chain   rhat
+  online_similarity_flip            model_size   full           25000 1.1051
+  online_similarity_flip             prev_size   full           25000 1.7008
+  online_similarity_flip            prev_alpha   full           25000 1.2336
+  online_similarity_flip         log_posterior   full           25000 1.0837
+  online_similarity_flip           subject3026   full           25000 1.2327
+  online_similarity_flip           subject4014   full           25000 1.3053
+  online_similarity_flip positive_subject_mean   full           25000 1.2310
+ online_similarity_local            model_size   full           25000 1.0596
+ online_similarity_local             prev_size   full           25000 1.3174
+ online_similarity_local            prev_alpha   full           25000 1.1591
+ online_similarity_local         log_posterior   full           25000 1.0122
+ online_similarity_local           subject3026   full           25000 1.0790
+ online_similarity_local           subject4014   full           25000 1.4921
+ online_similarity_local positive_subject_mean   full           25000 1.2279
+            uniform_flip            model_size   full           25000 1.0250
+            uniform_flip             prev_size   full           25000 1.0336
+            uniform_flip            prev_alpha   full           25000 1.0905
+            uniform_flip         log_posterior   full           25000 1.0278
+            uniform_flip           subject3026   full           25000 1.0180
+            uniform_flip           subject4014   full           25000 1.0357
+            uniform_flip positive_subject_mean   full           25000 1.0242
+ bulk_ess tail_ess  mcse_mean range_chain_means
+  24.3831  172.533 1.52364654          7.479520
+   6.5056   40.262 1.59196984          7.483640
+  12.2573   63.999 0.15421960          0.763996
+  31.6343  272.179 4.82701583         21.873567
+  12.2360   14.272 0.06408776          0.279111
+  10.0071   20.348 0.04664824          0.200283
+  12.3346   31.885 0.00310474          0.014841
+  44.4135  222.686 1.13753175          5.880840
+   9.8197   71.135 0.86395930          4.255440
+  17.1991  107.786 0.13389558          0.706146
+ 751.4838 5822.799 0.90307584          7.052214
+  32.5422   34.237 0.02279221          0.095457
+   7.3641   32.030 0.08294427          0.360277
+  12.3449   78.405 0.00324391          0.014111
+ 128.9916  204.405 0.67696060          3.489960
+ 105.3195  107.548 0.23332295          1.184920
+  28.7649  309.631 0.09473654          0.489236
+ 151.4170  747.105 2.18134924         13.134694
+ 328.7493 1813.165 0.00522538          0.034504
+ 109.0296  172.514 0.01408266          0.073367
+ 163.2421 1643.222 0.00072899          0.003266
+
+MULTICHAIN DIAGNOSTICS: LAST HALF
+                  method              variable    window draws_per_chain   rhat
+  online_similarity_flip            model_size last_half           12500 1.1369
+  online_similarity_flip             prev_size last_half           12500 1.6961
+  online_similarity_flip            prev_alpha last_half           12500 1.1445
+  online_similarity_flip         log_posterior last_half           12500 1.0505
+  online_similarity_flip           subject3026 last_half           12500 1.0811
+  online_similarity_flip           subject4014 last_half           12500 1.5381
+  online_similarity_flip positive_subject_mean last_half           12500 1.2138
+ online_similarity_local            model_size last_half           12500 1.0387
+ online_similarity_local             prev_size last_half           12500 1.4438
+ online_similarity_local            prev_alpha last_half           12500 1.1261
+ online_similarity_local         log_posterior last_half           12500 1.0199
+ online_similarity_local           subject3026 last_half           12500 1.0485
+ online_similarity_local           subject4014 last_half           12500 1.5319
+ online_similarity_local positive_subject_mean last_half           12500 1.1844
+            uniform_flip            model_size last_half           12500 1.0938
+            uniform_flip             prev_size last_half           12500 1.0878
+            uniform_flip            prev_alpha last_half           12500 1.1592
+            uniform_flip         log_posterior last_half           12500 1.0481
+            uniform_flip           subject3026 last_half           12500 1.0357
+            uniform_flip           subject4014 last_half           12500 1.0435
+            uniform_flip positive_subject_mean last_half           12500 1.0104
+ bulk_ess tail_ess  mcse_mean range_chain_means
+  19.2552  153.970 1.77985431         8.0349600
+   6.4742   29.464 1.62729281         8.1790400
+  18.9882   76.157 0.11157420         0.5432968
+  62.5832  790.938 3.41315007        20.5095991
+  32.6776   45.169 0.04067445         0.1723161
+   7.0819   20.165 0.06175482         0.2580027
+  12.9775   25.927 0.00290387         0.0133769
+  82.4675  649.971 0.82702003         3.8405600
+   8.0160   31.502 0.91941098         4.4948000
+  21.9666  210.516 0.10482806         0.5079831
+ 217.2925 2467.269 1.76799089         9.3088174
+  58.5015  314.481 0.01184211         0.0577535
+   7.1113  115.243 0.08551679         0.3705608
+  15.3075  182.087 0.00269154         0.0119582
+  34.9106   43.799 1.31215370         4.5060800
+  36.0237  245.937 0.36549737         1.6043200
+  16.7279  137.140 0.12773770         0.6307120
+  70.9420  469.000 3.11874079        17.6882580
+ 126.6337 1201.654 0.00793999         0.0584481
+  71.7110  161.056 0.01204247         0.0673051
+ 619.8982 1407.210 0.00036852         0.0017772
+
+SUBJECT4014: OCCUPANCY AND END-OF-SWEEP CROSSINGS
+                  method          start subject window mean_percent
+  online_similarity_flip           null    4014   full    0.0024265
+  online_similarity_flip  moderate_5pct    4014   full   20.0307490
+  online_similarity_flip moderate_10pct    4014   full    0.0030536
+  online_similarity_flip    dense_15pct    4014   full    0.0218168
+ online_similarity_local           null    4014   full   35.8130108
+ online_similarity_local  moderate_5pct    4014   full    8.3301538
+ online_similarity_local moderate_10pct    4014   full    0.0047122
+ online_similarity_local    dense_15pct    4014   full   36.0323704
+            uniform_flip           null    4014   full   35.8668041
+            uniform_flip  moderate_5pct    4014   full   36.3887766
+            uniform_flip moderate_10pct    4014   full   36.4447664
+            uniform_flip    dense_15pct    4014   full   43.2035457
+ fraction_below5 end_of_sweep_threshold_crossings longest_low_run
+         1.00000                                0           25000
+         0.52624                             5405             213
+         1.00000                                0           25000
+         1.00000                                0           25000
+         0.12960                             5746              14
+         0.74428                             1220            6879
+         1.00000                                0           25000
+         0.11528                             2054             101
+         0.08308                             1690              71
+         0.13428                             3460              97
+         0.08044                             2906             119
+         0.01056                              450              22
+ longest_high_run first_percent last_percent
+                0    1.5790e-03   3.3846e-04
+              618    1.1334e-02   2.5566e+01
+                0    8.7646e-04   8.7338e-04
+                0    1.1449e-05   1.2115e-03
+              327    3.7956e+01   3.7567e+01
+              198    2.0036e-07   1.3962e+00
+                0    2.9631e-03   1.8293e-03
+             3887    3.8044e+01   3.5171e+01
+             1391    3.3915e+01   4.5827e+01
+             2211    5.3560e-04   1.0486e-02
+             1809    3.4184e+01   3.5183e+01
+             4185    2.5312e+01   4.0662e+01
+
+SUBJECT4014: RETAINED-HALF CHANGES (fraction units)
+                  method          start    variable first_half_mean
+  online_similarity_flip           null subject4014      3.3360e-05
+  online_similarity_flip  moderate_5pct subject4014      1.4261e-01
+  online_similarity_flip moderate_10pct subject4014      2.0989e-05
+  online_similarity_flip    dense_15pct subject4014      4.3136e-04
+ online_similarity_local           null subject4014      3.6076e-01
+ online_similarity_local  moderate_5pct subject4014      3.8803e-02
+ online_similarity_local moderate_10pct subject4014      5.8410e-05
+ online_similarity_local    dense_15pct subject4014      3.5005e-01
+            uniform_flip           null subject4014      3.4051e-01
+            uniform_flip  moderate_5pct subject4014      3.3097e-01
+            uniform_flip moderate_10pct subject4014      3.4734e-01
+            uniform_flip    dense_15pct subject4014      4.1994e-01
+ last_half_mean change_last_minus_first last5000_mean
+     1.5171e-05             -1.8189e-05    1.7712e-05
+     2.5801e-01              1.1540e-01    3.8395e-01
+     4.0082e-05              1.9094e-05    3.1088e-05
+     4.9813e-06             -4.2637e-04    6.2219e-06
+     3.5550e-01             -5.2696e-03    3.6318e-01
+     1.2780e-01              8.8997e-02    5.3767e-03
+     3.5834e-05             -2.2575e-05    3.1779e-05
+     3.7060e-01              2.0546e-02    3.9351e-01
+     3.7682e-01              3.6308e-02    3.5288e-01
+     3.9681e-01              6.5842e-02    3.7705e-01
+     3.8155e-01              3.4206e-02    3.7802e-01
+     4.4413e-01              2.4183e-02    4.3679e-01
+
+SUBJECT3026: RETAINED-HALF CHANGES (fraction units)
+                  method          start    variable first_half_mean
+  online_similarity_flip           null subject3026        0.369117
+  online_similarity_flip  moderate_5pct subject3026        0.440678
+  online_similarity_flip moderate_10pct subject3026        0.412535
+  online_similarity_flip    dense_15pct subject3026        0.054773
+ online_similarity_local           null subject3026        0.501476
+ online_similarity_local  moderate_5pct subject3026        0.446661
+ online_similarity_local moderate_10pct subject3026        0.354049
+ online_similarity_local    dense_15pct subject3026        0.487209
+            uniform_flip           null subject3026        0.477083
+            uniform_flip  moderate_5pct subject3026        0.476227
+            uniform_flip moderate_10pct subject3026        0.487643
+            uniform_flip    dense_15pct subject3026        0.485811
+ last_half_mean change_last_minus_first last5000_mean
+        0.39978               0.0306594       0.44256
+        0.48250               0.0418247       0.50315
+        0.41527               0.0027335       0.41710
+        0.31019               0.2554140       0.40188
+        0.48342              -0.0180537       0.46969
+        0.45948               0.0128174       0.44529
+        0.45438               0.1003342       0.45020
+        0.51214               0.0249281       0.53579
+        0.45535              -0.0217370       0.46692
+        0.48811               0.0118841       0.47822
+        0.51379               0.0261511       0.52062
+        0.47378              -0.0120342       0.47077
+
+PIP DISAGREEMENT: BACTEROIDES AND PREVOTELLA
+                  method       genus category max_spread spreads_ge_point1
+  online_similarity_flip Bacteroides        1    0.44900                13
+  online_similarity_flip  Prevotella        6    0.99732                93
+ online_similarity_local Bacteroides        1    0.38860                 7
+ online_similarity_local  Prevotella        6    0.99876                88
+            uniform_flip Bacteroides        1    0.30500                 6
+            uniform_flip  Prevotella        6    0.98116                80
+ spreads_ge_quarter spreads_ge_half all_starts_pip_ge_point9
+                  4               0                        0
+                 65              26                        0
+                  3               0                        1
+                 66              41                        1
+                  2               0                        1
+                 52              34                        3
+ all_starts_pip_le_point1
+                      102
+                       23
+                      107
+                       27
+                      108
+                       26
+
+OUTSIDE PREVOTELLA: WITHIN-METHOD CROSS-START PIP STABILITY
+                  method genera median_genus_max_pip_spread
+  online_similarity_flip     29                     0.03928
+ online_similarity_local     29                     0.02100
+            uniform_flip     29                     0.09776
+ predictors_spread_ge_quarter predictors_spread_ge_half max_pip_spread
+                            6                         0        0.44900
+                            3                         0        0.38860
+                            9                         0        0.34332
+These are descriptive agreement measures, not independent estimates of true PIP accuracy.
+
+PIPS >=0.5 IN ALL12 CHAINS (exploratory support, not convergence or causal evidence)
+                 genus category predictor predictor_code min_method1
+           Bacteroides        1        71           malt     0.81024
+           Bacteroides        1        94            tau     0.78952
+           Bacteroides        1       109           ucat     0.55224
+           Barnesiella        2         1          calor     0.83832
+            Prevotella        6        45           f204     0.67988
+ Phascolarctobacterium       24        35         iodine     0.93804
+        Parasutterella       29        25           alco     0.74160
+ pooled_method1 min_method2 pooled_method2 min_method3 pooled_method3
+        0.93408     0.55704        0.63957     0.65928        0.73669
+        0.94340     0.97888        0.98668     0.99336        0.99649
+        0.70255     0.72924        0.80420     0.77816        0.87042
+        0.87768     0.87316        0.88508     0.85300        0.90371
+        0.84124     0.86244        0.93402     0.99884        0.99919
+        0.94205     0.92548        0.93311     0.87664        0.90727
+        0.80683     0.80164        0.82119     0.81724        0.85842
+ min_all12_pip               nutrient max_all12_pip
+       0.55704                Maltose       0.98608
+       0.78952                Taurine       0.99976
+       0.55224  Catechin, flavan-3-ol       0.96068
+       0.83832               Calories       0.94056
+       0.67988 Arachadonic fatty acid       0.99980
+       0.87664                 Iodine       0.94984
+       0.74160                Alcohol       0.91500
+
+HIGH PIPS >=0.9 IN ALL12 CHAINS (exploratory, no convergence claim)
+ [1] genus          category       predictor      predictor_code min_method1   
+ [6] pooled_method1 min_method2    pooled_method2 min_method3    pooled_method3
+[11] min_all12_pip 
+<0 rows> (or 0-length row.names)
+
+DESCRIPTIVE COMPUTATIONAL COSTS
+                  method median_wall_hours total_allocated_core_hours
+  online_similarity_flip           50.0315                    1995.96
+ online_similarity_local           53.2587                    2153.73
+            uniform_flip            3.4386                     137.39
+ total_worker_cpu_hours
+               1827.520
+               1948.344
+                 75.215

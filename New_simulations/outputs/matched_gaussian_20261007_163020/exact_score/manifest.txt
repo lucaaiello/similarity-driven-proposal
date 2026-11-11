@@ -1,0 +1,11 @@
+mode: full
+n: 100
+p: 10
+datasets: 20
+chains: 4
+budget_seconds: 1
+burn: 500
+fixed_lambda_grid: 0.2,0.5,0.8,1.1,1.5
+engine: optimized rank-one similarity proposals
+online adaptation: balanced directions, 2% mixture, diminishing diversity adaptation throughout sampling
+marginal score: sum of univariate evidence in candidate model divided by sqrt(model size)
