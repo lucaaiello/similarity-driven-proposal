@@ -17,8 +17,7 @@ cd similarity-driven-proposal
 git lfs pull
 ```
 
-These instructions describe the prepared revision; the local changes must still
-be published. The 232 MiB application `summary.rds` is marked for Git LFS.
+The 232 MiB application `summary.rds` is stored through Git LFS.
 A small text pointer is not the saved result. Alternatively, extract the complete
 `reproduction_package.zip` supplied with the article: it contains the actual
 result objects and needs no Git LFS. A GitHub source ZIP may contain LFS pointers.
